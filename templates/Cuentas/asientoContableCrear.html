@@ -1,0 +1,30 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Asientos contables
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Nuevo asiento contable {% endblock %}</title>
+
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+				<h4>Nuevo asiento contable</h4>
+			</div>
+			<div class="form-body">
+			<form class="form-horizontal" method="POST" action="{% url 'asiento:nuevo_asientoContable' %}"> 
+					<div class="form-group">
+					{%csrf_token %}
+					{{form.as_p}}
+					 <br><br>
+					 <button type="submit" class="btn btn-primary">Guardar</button>
+					 <a class="btn btn-outline-success" href="{% url 'asiento:lista_asientos' %} "><button type = "button" class = "btn btn-success">Atrás</button></a>
+				 	</div>
+				 </form> 
+			</div>
+		
+</div>
+{% endblock %}
+

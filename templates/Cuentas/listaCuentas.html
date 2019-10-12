@@ -1,0 +1,31 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Catalogo de cuentas
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Catalogo de cuentas{% endblock %}</title>
+
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	<tr>		
+	<th scope="col"><h4><strong>Codigo</strong></h4></th>
+	<th scope="col"><h4><strong>Nombre</strong></h4></th>
+	</tr>
+		</thead>
+				<tbody>
+				{% if object_list %}
+					{% for cuentas in object_list %}
+					<tr>
+						<td>{{cuentas.id}}</td>
+						<td>{{cuentas.nombre }}</td>
+					{% endfor %}
+				{% else %}
+				No hay cuentas registradas
+				{% endif %}
+				</tbody>	 
+							
+</table>
+{% endblock %}

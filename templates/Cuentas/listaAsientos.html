@@ -1,0 +1,56 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Diario
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro Diario{% endblock %}</title>
+
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+				<h4>Libro Diario</h4>
+			</div>
+			<div class="form-body">
+			<form class="form-horizontal" method="POST"> 
+					<div class="form-group">
+					{% csrf_token %}
+					 <br><br>
+					 <a href="#" type="submit" class="btn btn-primary">Agregar asiento contable</a>
+				 	</div>
+				 </form> 
+			</div>
+		
+</div>
+
+
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	<tr>		
+	<th scope="col"><h4><strong>Fecha</strong></h4></th>
+	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+	<th scope="col"><h4><strong>Detalle</strong></h4></th>
+	<th scope="col"><h4><strong>Debe</strong></h4></th>
+	<th scope="col"><h4><strong>Haber</strong></h4></th>
+
+	</tr>
+		</thead>
+				<tbody>
+				{% if object_list %}
+					{% for asiento in object_list %}
+					<tr>
+						<td>{{asiento.fecha}}</td>
+						<td>{{ asiento.cuentas.nombre }}</td>
+						<td>{{ asiento.detalle}}</td>
+						<td>{{asiento.importeDebe}}</td>
+						<td>{{asiento.importeHaber}}</td>
+					{% endfor %}
+				{% else %}
+				No hay asientos registrados
+				{% endif %}
+				</tbody>	 
+							
+</table>
+{% endblock %}

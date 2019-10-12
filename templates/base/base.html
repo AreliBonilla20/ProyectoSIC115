@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<html>
+<head>
+	{% block extrahead %}
+	{% endblock %}
+	<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/estilo.css" %}">
+	<script src="{% static "bootstrap/js/jquery.min.js" %}"></script>
+	<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>	
+  	<link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>{% block Title %}Restaurantes{% endblock  %}</title>
+</head>
+<body class="from">
+{% block navbar %}	
+<div class="container">
+	<header>
+		<nav class="navegacion">
+			<ul class="menu">
+				
+				<li><a href="#">Home</li>
+				<li><a href="{% url 'restaurantes:listar_restaurantes'%}">Restaurantes</li>
+				<li><a href="{% url 'evaluacion:crear_evaluacion'%}">Nueva evaluacion</li>
+				<li><a href="{% url 'evaluacion:listar_reportes' %}">Reportes</li>
+					<li><a href="">Opciones</a>
+					<ul class="submenu">
+						<li><a href="{% url 'lo:log' %}">Salir</a></li>
+					</ul>
+      			</li>
+			</ul>
+		</nav>
+	</header>
+{% endblock %}
+
+
+{% block content %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+{% block extrajs %}
+{% endblock %}
+</body>
+</html> 
