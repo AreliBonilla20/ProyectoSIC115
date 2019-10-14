@@ -1,0 +1,56 @@
+{%  extends 'base/base1.html'%}
+{% load staticfiles %}
+
+<title>{% block Title %}Contabilidad{% endblock %}</title>
+
+{% block titulo %}
+Inicio
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="jumbotron estiloJumbotron">
+
+        <div class=" container">
+          <div class="titulo">
+            <br>
+            <h2><br><strong>CONTABILIDAD</strong></h2><br><br><br>
+            <h4><strong>Despacho jurídico</strong></h4>
+            <p>González Orellana</p>
+          </div>
+
+          <img  class="imagen" src="{% static 'images/banner2.jpg' %}" alt="">
+
+        </div>
+        <br><br>
+        <div class="container">
+          <div class="descripcionBanner">
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+              <h3>Transacciones</h3>
+              <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
+              <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+           </div>
+
+           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+             <h3>Inventario</h3>
+             <h5>Control de inventarios y compras</h5><br><br><br>
+             <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <h3>Estados Financieros</h3>
+            <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
+            <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+         </div>
+
+        </div>
+
+
+
+
+      </section>
+
+{% endblock %}

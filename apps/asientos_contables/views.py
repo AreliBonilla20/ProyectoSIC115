@@ -6,8 +6,11 @@ from apps.asientos_contables.forms import *
 from apps.asientos_contables.models import *
 
 
-#def index(request):
- #   return render(request,'Cuentas/index.html')
+def index(request):
+  return render(request,'Cuentas/login.html')
+
+def indexAdmin(request):
+  return render(request,'Cuentas/index.html')
 
 class asientoContableCreate(CreateView):
 	model=asientoContable
