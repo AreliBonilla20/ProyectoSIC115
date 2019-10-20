@@ -28,7 +28,8 @@ Libro Diario
 
 <table class="table table-bo"> 
 	<thead class="thead-light">
-	<tr>		
+	<tr>
+	<th scope="col"><h4><strong>N° asiento</strong></h4></th>		
 	<th scope="col"><h4><strong>Fecha</strong></h4></th>
 	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
 	<th scope="col"><h4><strong>Detalle</strong></h4></th>
@@ -41,11 +42,25 @@ Libro Diario
 				{% if object_list %}
 					{% for asiento in object_list %}
 					<tr>
+						<td>{{asiento.numero_asiento}}</td>
 						<td>{{asiento.fecha}}</td>
-						<td>{{ asiento.cuentas.nombre }}</td>
-						<td>{{ asiento.detalle}}</td>
-						<td>{{asiento.importeDebe}}</td>
-						<td>{{asiento.importeHaber}}</td>
+						<td>{{ asiento.cuenta_debe}}
+						<br><br>
+						{{asiento.cuenta_haber}}
+						</td>
+						<td>{{ asiento.detalle_debe}}
+						<br><br>
+						{{asiento.detalle_haber}}
+						</td>
+						<td>
+						{{ asiento.debe}}
+						<br><br>
+						</td>
+						<td>
+						<br><br>
+						{{ asiento.haber}}
+						</td>
+					</tr>
 					{% endfor %}
 				{% else %}
 				No hay asientos registrados

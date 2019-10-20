@@ -19,8 +19,10 @@ Catalogo de cuentas
 				{% if object_list %}
 					{% for cuentas in object_list %}
 					<tr>
-						<td>{{cuentas.id}}</td>
+						<td>{{cuentas.codigo}}</td>
 						<td>{{cuentas.nombre }}</td>
+						<td></td>
+						<td>
 					{% endfor %}
 				{% else %}
 				No hay cuentas registradas

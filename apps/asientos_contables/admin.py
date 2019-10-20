@@ -4,7 +4,7 @@ from django.contrib import admin
 from apps.asientos_contables.models import *
 
 admin.site.register(asientoContable)
-admin.site.register(libroMayor)
-#admin.site.register(libroDiario)
 admin.site.register(cuenta)
-
+admin.site.register(tipoCuenta)
+admin.site.register(registroTMayor)
+admin.site.register(movimiento)

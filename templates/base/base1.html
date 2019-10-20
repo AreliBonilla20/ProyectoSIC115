@@ -37,13 +37,26 @@
 
                 <ul class="nav navbar-nav">
 
+                    <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Cuentas
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'asiento:nueva_cuenta' %}">Nueva cuenta</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'asiento:catalogo' %}">Catalogo de cuentas</a></li>
+
+                    </ul>
+
+                  </li>
                   <li class="dropdown">
                     <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Transacciones
                       <span class="caret"></span>
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Registro de transacciones</a></li>
+                      <li><a href="{% url 'asiento:nuevo_asientoContable' %}">Registro de transacciones</a></li>
                       <li class="divider"></li>
                       <li><a href="#">Ver transacciones</a></li>
 
@@ -57,9 +70,9 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Libro diario</a></li>
+                      <li><a href="{% url 'asiento:lista_asientos' %}">Libro diario</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Libro mayor</a></li>
+                      <li><a href="{% url 'asiento:registrost' %}">Libro mayor</a></li>
 
                     </ul>
 
