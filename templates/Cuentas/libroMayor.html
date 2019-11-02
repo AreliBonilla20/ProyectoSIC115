@@ -8,7 +8,7 @@ Libro Mayor
 {% block content %}
 <title>{% block Title %}Libro Mayor{% endblock %}</title>
 
-<a href="{% url 'asiento:nuevo_registro' %}" type="submit" class="btn btn-primary">Agregar registro</a></td>
+<a href="{% url 'asiento:nuevo_elementoMayor' %}" type="submit" class="btn btn-primary">Elemento mayor</a>
 
 <table class="table table-bo"> 
 	<thead class="thead-light">
@@ -17,21 +17,20 @@ Libro Mayor
 	<th scope="col"><h4><strong>Debe</strong></h4></th>
 	<th scope="col"><h4><strong>Haber</strong></h4></th>
 	<th scope="col"><h4><strong>Saldo</strong></h4></th>
-	<th scope="col"><h4><strong>Acciones</strong></h4></th>
 	
 	</tr>
 		</thead>
 				<tbody>
 				{% if object_list %}
-					{% for registro in object_list %}
+					{% for elemento in object_list %}
 					<tr>
-						<td>{{registro.cuenta.nombre}}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><a  class="btn btn-info" href="{% url 'asiento:listar_movimientos' registro.id %}" %}">Ver movimientos</a>
-						<a href="{% url 'asiento:movimiento' registro.id %}" type="submit" class="btn btn-primary">Agregar movimiento</a></td>
+						<td>{{elemento.mayor}}</td>
+						<td>{{elemento.debe}}</td>
+						<td>{{elemento.haber}}</td>
+						<td>{{elemento.saldo}}</td>
+					</tr>
 					{% endfor %}
+	
 				{% else %}
 				No hay cuentas registradas
 				{% endif %}

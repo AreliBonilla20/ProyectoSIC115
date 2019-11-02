@@ -17,10 +17,11 @@ Asientos contables
 			<form class="form-horizontal" method="POST" action="{% url 'asiento:nuevo_asientoContable' %}"> 
 					<div class="form-group">
 					{%csrf_token %}
+					{{form2.as_p}}
 					{{form.as_p}}
 					 <br><br>
 					 <button type="submit" class="btn btn-primary">Guardar</button>
-					 <a class="btn btn-outline-success" href="{% url 'asiento:lista_asientos' %} "><button type = "button" class = "btn btn-success">Atrás</button></a>
+					 <a class="btn btn-outline-success" href="{% url 'asiento:libroDiario' %} "><button type = "button" class = "btn btn-success">Atrás</button></a>
 				 	</div>
 				 </form> 
 			</div>

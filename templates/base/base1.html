@@ -70,9 +70,9 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="{% url 'asiento:lista_asientos' %}">Libro diario</a></li>
+                      <li><a href="{% url 'asiento:libroDiario' %}">Libro diario</a></li>
                       <li class="divider"></li>
-                      <li><a href="{% url 'asiento:registrost' %}">Libro mayor</a></li>
+                      <li><a href="{% url 'asiento:listarLibroMayor' %}">Libro mayor</a></li>
 
                     </ul>
 
@@ -122,19 +122,19 @@
         </nav>
 
 
-	  </header>
-	  
-	  <div id="page-wrapper">
-			<div class="main-page">
-					
-				
-				<div class="blank-page widget-shadow scroll" id="style-2 div1" >
-          		{% block content%}
-          		{%endblock%}
-				</div>
-			</div>
-		</div>
-		
+    </header>
+    
+    <div id="page-wrapper">
+      <div class="main-page">
+          
+        
+        <div class="blank-page widget-shadow scroll" id="style-2 div1" >
+              {% block content%}
+              {%endblock%}
+        </div>
+      </div>
+    </div>
+    
 
 
       <footer>

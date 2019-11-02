@@ -1,0 +1,30 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro Mayor{% endblock %}</title>
+
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+				<h4>Libro Mayor</h4>
+			</div>
+			<div class="form-body">
+			<form class="form-horizontal" method="POST"> 
+					<div class="form-group">
+					{%csrf_token %}
+					{{form2.as_p}}
+					 {{form.as_p}}
+
+					 <br><br>
+					 <button type="submit" class="btn btn-primary">Guardar</button>
+				 	</div>
+				 </form> 
+			</div>
+		
+</div>
+{% endblock %}

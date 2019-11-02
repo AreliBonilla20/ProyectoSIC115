@@ -8,37 +8,28 @@ class asientoContableForm(forms.ModelForm):
 
 		fields=[
 		'numero_asiento',
-		'fecha',
 		'cuenta_debe',
-		'detalle_debe',
-		'debe',
+		'importeDebe',
 		'cuenta_haber',
-		'detalle_haber',
-		'haber',
+		'importeHaber',
 
 		
 		]
 
 		labels={
 		'numero_asiento':'N° asiento',
-		'fecha':'Fecha',
 		'cuenta_debe':'Cuenta a cargar',
-		'detalle_debe':'Detalle',
-		'debe':'Debe',
+		'importeDebe':'Debe',
 		'cuenta_haber':'Cuenta a abonar',
-		'detalle_haber':'Detalle',
-		'haber':'haber',
+		'importeHaber':'haber',
 		}
 
 		widgets={
 		'numero_asiento':forms.NumberInput(attrs={'class':'form-control'}),
-		'fecha':forms.TextInput(attrs={'class':'form-control','type':'Date'}),
 		'cuenta_debe':forms.Select(attrs={'class':'form-control'}),
-		'detalle_debe':forms.TextInput(attrs={'class':'form-control'}),
-		'debe':forms.NumberInput(attrs={'class':'form-control'}),
+		'importeDebe':forms.NumberInput(attrs={'class':'form-control'}),
 		'cuenta_haber':forms.Select(attrs={'class':'form-control'}),
-		'detalle_haber':forms.TextInput(attrs={'class':'form-control'}),
-		'haber':forms.NumberInput(attrs={'class':'form-control'}),
+		'importeHaber':forms.NumberInput(attrs={'class':'form-control'}),
 		}
 class cuentaForm(forms.ModelForm):
 	class Meta:
@@ -81,45 +72,102 @@ class tipoCuentaForm(forms.ModelForm):
 		'tipo':forms.TextInput(attrs={'class':'form-control'}),
 		}
 
-class registroTMayorForm(forms.ModelForm):
+class libroDiarioForm(forms.ModelForm):
 	class Meta:
-		model = registroTMayor
+		model = libroDiario
 
 		fields=[
-		'cuenta',
+		'fecha',
+		'concepto',
 		
 		]
 
 		labels={
-		'cuenta':'cuenta',
+		'fecha':'Fecha',
+		'concepto':'Concepto',
 		}
 
 		widgets={
-		'cuenta':forms.Select(attrs={'class':'form-control'}),
+		'fecha':forms.TextInput(attrs={'class':'form-control','type':'date'}),
+		'concepto':forms.TextInput(attrs={'class':'form-control'}),
 		}
 
-class movimientoForm(forms.ModelForm):
+class elementoMayorForm(forms.ModelForm):
 	class Meta:
-		model = movimiento
+		model = elementoMayor
 
 		fields=[
-		'registro',
-		'concepto',
+		'fecha',
 		'debe',
 		'haber',
+		#'saldo',
+		
 		
 		]
 
 		labels={
-		'registro':'Registro',
-		'concepto':'Cuenta que ha cargado o abonado',
+		'fecha':'Fecha',
 		'debe':'Debe',
 		'haber':'Haber',
+		#'saldo':'Saldo',
+		
 		}
 
 		widgets={
-		'registro':forms.HiddenInput(attrs={'class':'form-control'}),
-		'concepto':forms.Select(attrs={'class':'form-control'}),
+		'fecha':forms.TextInput(attrs={'class':'form-control','type':'date'}),
 		'debe':forms.NumberInput(attrs={'class':'form-control'}),
 		'haber':forms.NumberInput(attrs={'class':'form-control'}),
+		#'saldo':forms.NumberInput(attrs={'class':'form-control'}),
 		}
+
+class libroMayorForm(forms.ModelForm):
+	class Meta:
+		model = libroMayor
+
+		fields=[
+		'nombre_cuenta',
+		
+		]
+
+		labels={
+		'nombre_cuenta':'Cuenta',
+		}
+
+		widgets={
+		'nombre_cuenta':forms.Select(attrs={'class':'form-control'}),
+		}
+
+class elementoBalanceComprobacionForm(forms.ModelForm):
+	class Meta:
+		model = elementoBalanceComprobacion
+
+		fields=[
+		'cuentas',
+		'balance',
+		'sumaDebe',
+		'sumaHaber',
+		#'saldoDebe',
+		#'saldoHaber',
+		
+		
+		]
+
+		labels={
+		'cuentas':'Cuenta',
+		'balance':'Balance',
+		'sumaDebe':'Debe',
+		'sumaHaber':'Haber',
+		#'saldoDebe':'Saldo Acreedor',
+		#'saldoHaber':'Saldo Deudor',
+		
+		}
+
+		widgets={
+		'cuentas':forms.Select(attrs={'class':'form-control'}),
+		'balance':forms.HiddenInput(attrs={'class':'form-control'}),
+		'sumaDebe':forms.NumberInput(attrs={'class':'form-control'}),
+		'sumaHaber':forms.NumberInput(attrs={'class':'form-control'}),
+		#'saldoDebe':forms.NumberInput(attrs={'class':'form-control'}),
+		#'saldoHaber':forms.NumberInput(attrs={'class':'form-control'}),
+		}
+

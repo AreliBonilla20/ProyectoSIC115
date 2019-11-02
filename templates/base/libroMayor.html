@@ -1,0 +1,52 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro mayor{% endblock %}</title>
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+				<h4>Libro mayor</h4>
+			</div>
+			<div class="form-body">
+			<form class="form-horizontal" method="POST"> 
+					<div class="form-group">
+					{%csrf_token %}
+					 {{form.as_p}}
+					 <br><br>
+					 <button type="submit" class="btn btn-primary">Agregar cuenta mayorizada</button>
+
+					 <a href="{% url 'asiento:cuenta_t' %}" type="submit" class="btn btn-primary">Mayorizar cuenta</a>
+				 	</div>
+				 </form> 
+			</div>	
+</div>
+{% block table %}
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	<tr>	
+	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+	<th scope="col"><h4><strong>Debe</strong></h4></th>
+	<th scope="col"><h4><strong>Haber</strong></h4></th>
+
+	</tr>
+		</thead>
+				<tbody>
+				{% if object_list %}
+					{% for libro in object_list %}<tr>
+						<td>{{libro.nombre}}</td>
+						<td></td>
+						<td></td>
+					{% endfor %}
+				{% else %}
+				No hay asientos registrados
+				{% endif %}
+				</tbody>	 
+							
+</table>
+{% endblock %}
+{% endblock %}

@@ -17,14 +17,12 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.asientos_contables.views import index, indexAdmin
+from apps.asientos_contables.views import index,indexAdmin
 from django.contrib.auth.views import login, logout_then_login, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^indexAdmin/', indexAdmin, name="indexAdmin"),
+	url(r'^admin/',admin.site.urls),
+	url(r'^indexAdmin/',indexAdmin,name="indexAdmin"),  
     url(r'^asiento/', include('apps.asientos_contables.urls',namespace="asiento")), 
     url(r'^$', login, {'template_name':'Cuentas/login.html'}, name='login'),
-    
-   
 ] + static (settings.STATIC_URL , document_root = settings.STATIC_ROOT)
