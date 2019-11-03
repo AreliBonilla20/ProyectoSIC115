@@ -7,21 +7,52 @@ Catalogo de cuentas
 
 {% block content %}
 <title>{% block Title %}Catalogo de cuentas{% endblock %}</title>
+<div class="container">
+<div class="form-title">
+	<div class="panel panel-default">
+			<div class="panel-body" style="text-align: center; background: #ebecf0;">
+			  <h4><strong>Catálogo de cuentas</strong></h4>
+					  
+			</div>
+	</div>
+</div>
 
+
+<ul class="nav nav-tabs nav-justified">
+		<li class="active"><a href="{% url 'asiento:catalogo_cuentas' %}"><h5><strong>Todos</strong></h5></a></li>
+		<li><a href="{% url 'asiento:catalogo_activos' %}"><h5><strong>Activos</strong></h5></a></li>
+		<li><a href="{% url 'asiento:catalogo_pasivos' %}"><h5><strong>Pasivos</strong></h5></a></li>
+		<li><a href="{% url 'asiento:catalogo_patrimonio' %}"><h5><strong>Patrimonio</strong></h5></a></li>
+		
+	</ul>
+
+<br><br>
+
+<a href=""><img  style='position: absolute; right: 12%; top: 30%;' src="{% static 'images/pdf.png' %}" width="100px" height="100px"></a>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-8">
 <table class="table table-bo"> 
 	<thead class="thead-light">
-	<tr>		
-	<th scope="col"><h4><strong>Codigo</strong></h4></th>
+	<h3>Activos</h3>
+	<tr>	
+	<th scope="col"><h4><strong>Código</strong></h4></th>
 	<th scope="col"><h4><strong>Nombre</strong></h4></th>
-	<th scope="col"><h4><strong>Saldo</strong></h4></th>
+	<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+	
+	
 	</tr>
 		</thead>
 				<tbody>
-				{% if object_list %}
-					{% for cuenta in object_list %}
+				{% if listaAct %}
+					{% for i in listaAct %}
 					<tr>
-						<td>{{cuenta.codigo}}</td>
-						<td>{{cuenta.nombre }}</td>
+						<td>{{i.codigo}}</td>
+						<td>{{i.nombre }}</td>
+						<td>{{i.tipo_cuenta}}</td>
+						
+					</tr>
 					{% endfor %}
 				{% else %}
 				No hay cuentas registradas
@@ -29,4 +60,67 @@ Catalogo de cuentas
 				</tbody>	 
 							
 </table>
+
+<br><br>
+
+<table class="table table-bo"> 
+		<thead class="thead-light">
+		<h3>Pasivos</h3>
+		<tr>	
+		<th scope="col"><h4><strong>Código</strong></h4></th>
+		<th scope="col"><h4><strong>Nombre</strong></h4></th>
+		<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+		
+		</tr>
+			</thead>
+					<tbody>
+					{% if listaPas %}
+						{% for i in listaPas %}
+						<tr>
+							<td>{{i.codigo}}</td>
+							<td>{{i.nombre }}</td>
+							<td>{{i.tipo_cuenta}}</td>
+						</tr>
+						{% endfor %}
+					{% else %}
+					No hay cuentas registradas
+					{% endif %}
+					</tbody>	 
+								
+</table>
+
+<br><br>
+<table class="table table-bo"> 
+		<thead class="thead-light">
+		<h3>Patrimonio</h3>
+		<tr>	
+		<th scope="col"><h4><strong>Código</strong></h4></th>
+		<th scope="col"><h4><strong>Nombre</strong></h4></th>
+		<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+		
+		</tr>
+			</thead>
+					<tbody>
+					{% if listaPatr %}
+						{% for i in listaPatr %}
+						<tr>
+							<td>{{i.codigo}}</td>
+							<td>{{i.nombre }}</td>
+							<td>{{i.tipo_cuenta}}</td>
+						</tr>
+						{% endfor %}
+					{% else %}
+					No hay cuentas registradas
+					{% endif %}
+					</tbody>	 
+								
+	</table>
+
+
+</div>
+</div>
+</div>
+
+
+
 {% endblock %}

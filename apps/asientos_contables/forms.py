@@ -19,9 +19,9 @@ class asientoContableForm(forms.ModelForm):
 		labels={
 		'numero_asiento':'N° asiento',
 		'cuenta_debe':'Cuenta a cargar',
-		'importeDebe':'Debe',
+		'importeDebe':'Debe (Monto en $)',
 		'cuenta_haber':'Cuenta a abonar',
-		'importeHaber':'haber',
+		'importeHaber':'Haber (Monto en $)',
 		}
 
 		widgets={
@@ -44,7 +44,7 @@ class cuentaForm(forms.ModelForm):
 		]
 
 		labels={
-		'codigo': 'Codigo',
+		'codigo': 'Código',
 		'nombre':'Nombre',
 		'tipo_cuenta':'Seleccione el tipo de cuenta',
 		}
@@ -89,7 +89,7 @@ class libroDiarioForm(forms.ModelForm):
 
 		widgets={
 		'fecha':forms.TextInput(attrs={'class':'form-control','type':'date'}),
-		'concepto':forms.TextInput(attrs={'class':'form-control'}),
+		'concepto':forms.TextInput(attrs={'class':'form-control', 'type':'textarea'}),
 		}
 
 class elementoMayorForm(forms.ModelForm):

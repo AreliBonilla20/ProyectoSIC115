@@ -1,56 +1,192 @@
-{%  extends 'base/base1.html'%}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width, user-scalable-no, initial-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 
-<title>{% block Title %}Contabilidad{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 
-{% block titulo %}
-Inicio
-{% endblock %}
+    <title>Contabilidad</title>
+  </head>
+
+  <body>
+
+    <header>
+        <nav class="navbar navbar-static-top" role="navigation">
+
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" name="button" class="navbar-toggle collapsed" data-toggle="collapse data-target=#navegacion">
+                  <span class="sr-only">Menú</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <br>
+
+                <a href="{% url 'indexAdmin' %}" class="navbar-brand itemMenu">GONZÁLEZ ORELLANA</a>
+              </div>
+
+              <!--Inicia el menú-->
 
 
-{% block content %}
+              <div class="collapse navbar-collapse " id="navegacion">
+                <br>
+
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Cuentas
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'asiento:nueva_cuenta' %}">Nueva cuenta</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'asiento:catalogo_cuentas' %}">Catalogo de cuentas</a></li>
+
+                    </ul>
+
+                  </li>
+                  <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Transacciones
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'asiento:nuevo_asientoContable' %}">Registro de transacciones</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'asiento:libroDiario' %}">Ver transacciones</a></li>
+
+                    </ul>
+
+                  </li>
+
+                  <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Libros
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'asiento:libroDiario' %}">Libro diario</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'asiento:listarLibroMayor' %}">Libro mayor</a></li>
+
+                    </ul>
+
+                  </li>
+
+                 
+                  <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Estados Financieros
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Balance de comprobación</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Estado de resultados</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Estado de flujo de capital</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Balance general</a></li>
+
+                    </ul>
+
+                  </li>
+
+                  <li class="dropdown">
+                      <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Salarios
+                        <span class="caret"></span>
+                      </a>
+  
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Registro de compras</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Ver inventarios</a></li>
+  
+                      </ul>
+  
+                    </li>
+
+                  </ul>
+
+                  <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="" value="" placeholder="Buscar">
+                    </div>
+                    <button  class="btn btn-warning"type="button" name="button"><span class="glyphicon glyphicon-search"></span></button>
+                  </form>
+
+              </div>
+            </div>
+        </nav>
 
 
-<section class="jumbotron estiloJumbotron">
+    </header>
+    
+    <div id="page-wrapper">
+      <div class="main-page">
+          
+        
+        <div class="blank-page widget-shadow scroll" id="style-2 div1" >
+            <section class="jumbotron estiloJumbotron">
 
-        <div class=" container">
-          <div class="titulo">
-            <br>
-            <h2><br><strong>CONTABILIDAD</strong></h2><br><br><br>
-            <h4><strong>Despacho jurídico</strong></h4>
-            <p>González Orellana</p>
-          </div>
-
-          <img  class="imagen" src="{% static 'images/banner2.jpg' %}" alt="">
-
+                <div class=" container">
+                  <div class="titulo">
+                    <br>
+                    <h2><br><strong>CONTABILIDAD</strong></h2><br><br><br>
+                    <h4><strong>Despacho jurídico</strong></h4>
+                    <p>González Orellana</p>
+                  </div>
+        
+                  <img  class="imagen" src="{% static 'images/banner2.jpg' %}" alt="">
+        
+                </div>
+                <br><br>
+                <div class="container">
+                  <div class="descripcionBanner">
+        
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                      <h3>Transacciones</h3>
+                      <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
+                      <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+                   </div>
+        
+                   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                     <h3>Inventario</h3>
+                     <h5>Control de inventarios y compras</h5><br><br><br>
+                     <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+                  </div>
+        
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <h3>Estados Financieros</h3>
+                    <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
+                    <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
+                 </div>
+        
+                </div>
+        
+        
+        
+        
+              </section>
+         
         </div>
-        <br><br>
-        <div class="container">
-          <div class="descripcionBanner">
-
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-              <h3>Transacciones</h3>
-              <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
-              <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
-           </div>
-
-           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-             <h3>Inventario</h3>
-             <h5>Control de inventarios y compras</h5><br><br><br>
-             <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
-          </div>
-
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-            <h3>Estados Financieros</h3>
-            <h5>Registro y edicion de las transacciones para los libros mayor y diario</h5><br><br>
-            <button class="btn btn-warning btn-lg"type="button" name="button"><strong>Ver</button><br><br>
-         </div>
-
-        </div>
+      </div>
+    </div>
+    
 
 
+    <footer style="height: 7%;">
+      <div class="container-fluid"><br>
+       <p>Derechos Reservados©González Orellana 2019</p>
+       </div>
+    <footer>
 
-
-      </section>
-
-{% endblock %}
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

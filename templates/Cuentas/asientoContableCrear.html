@@ -2,29 +2,62 @@
 {% load staticfiles %}
 
 {% block titulo %}
-Asientos contables
+Nueva cuenta
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Nuevo asiento contable {% endblock %}</title>
+<title>{% block Title %}Nueva asiento contable{% endblock %}</title>
 
 <div class=" form-grids row form-grids-right">
 		
 			<div class="form-title">
-				<h4>Nuevo asiento contable</h4>
+					<div class="panel panel-default">
+							<div class="panel-body" style="text-align: center; background: #ebecf0; font-family:Arial, Helvetica, sans-serif;">
+							  <h4><strong>Agregar nuevo asiento contable</strong></h4>
+									  
+							</div>
+					</div>
 			</div>
+
+			<img  style='position: absolute; right: 17.5%; top: 70%;' src="{% static 'images/agregar.png' %}" width="100px" height="100px">
+
+			<div class="container-fluid">
+				<div class="col-md-12">
 			<div class="form-body">
-			<form class="form-horizontal" method="POST" action="{% url 'asiento:nuevo_asientoContable' %}"> 
+				<br><br>
+				<form class="form-horizontal"  method="POST" action="{% url 'asiento:nuevo_asientoContable' %}"> 
 					<div class="form-group">
+
+					<style>
+						form li{
+							visibility: hidden;
+						}
+					</style>
 					{%csrf_token %}
-					{{form2.as_p}}
+					<div class="col-md-7">
 					{{form.as_p}}
+					</div>
+
+					<div class="col-md-4"style="position: absolute; right: 5%; top: 1%;">
+					{{form2.as_p}}
+					</div>
 					 <br><br>
+					 <div style="position: absolute; left: 2%; top: 100%;">
 					 <button type="submit" class="btn btn-primary">Guardar</button>
-					 <a class="btn btn-outline-success" href="{% url 'asiento:libroDiario' %} "><button type = "button" class = "btn btn-success">Atrás</button></a>
-				 	</div>
+					 
+					</div> 
+					
+					
+					</div>
 				 </form> 
+			
 			</div>
+			</div>
+			
+
+		
+			</div>
+			
 		
 </div>
 {% endblock %}

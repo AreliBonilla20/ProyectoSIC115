@@ -26,7 +26,7 @@
                 </button>
                 <br>
 
-                <a href="index.html" class="navbar-brand itemMenu">GONZÁLEZ ORELLANA</a>
+                <a href="{% url 'indexAdmin' %}" class="navbar-brand itemMenu">GONZÁLEZ ORELLANA</a>
               </div>
 
               <!--Inicia el menú-->
@@ -45,7 +45,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{% url 'asiento:nueva_cuenta' %}">Nueva cuenta</a></li>
                       <li class="divider"></li>
-                      <li><a href="{% url 'asiento:catalogo' %}">Catalogo de cuentas</a></li>
+                      <li><a href="{% url 'asiento:catalogo_cuentas' %}">Catalogo de cuentas</a></li>
 
                     </ul>
 
@@ -58,7 +58,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{% url 'asiento:nuevo_asientoContable' %}">Registro de transacciones</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Ver transacciones</a></li>
+                      <li><a href="{% url 'asiento:libroDiario' %}">Ver transacciones</a></li>
 
                     </ul>
 
@@ -78,26 +78,14 @@
 
                   </li>
 
-                  <li class="dropdown">
-                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Inventarios
-                      <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Registro de compras</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">Ver inventarios</a></li>
-
-                    </ul>
-
-                  </li>
+                 
                   <li class="dropdown">
                     <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Estados Financieros
                       <span class="caret"></span>
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Balance general</a></li>
+                      <li><a href="#">Balance de comprobación</a></li>
                       <li class="divider"></li>
                       <li><a href="#">Estado de resultados</a></li>
                       <li class="divider"></li>
@@ -108,6 +96,20 @@
                     </ul>
 
                   </li>
+
+                  <li class="dropdown">
+                      <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Salarios
+                        <span class="caret"></span>
+                      </a>
+  
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Registro de compras</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Ver inventarios</a></li>
+  
+                      </ul>
+  
+                    </li>
                   </ul>
 
                   <form class="navbar-form navbar-right" role="search">
@@ -121,28 +123,39 @@
             </div>
         </nav>
 
+    
 
     </header>
+    <br><br><br>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
     
     <div id="page-wrapper">
       <div class="main-page">
           
         
         <div class="blank-page widget-shadow scroll" id="style-2 div1" >
+         
               {% block content%}
               {%endblock%}
+          
+              
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+</div>
     
 
-
-      <footer>
-        <div class="container-fluid">
-          <br><br>
-         <p>DerechosReservados©GonzálezOrellana2019</p>
+<!--
+      <footer style="height: 7%;">
+        <div class="container-fluid"><br>
+         <p>Derechos Reservados©González Orellana 2019</p>
          </div>
-      <footer>
+      <footer> -->
 
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

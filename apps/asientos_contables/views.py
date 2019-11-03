@@ -10,16 +10,30 @@ def index(request):
 
 def indexAdmin(request):
     return render(request,'Cuentas/index.html')
-    
-class catalogoCuentas(ListView):
-    model=cuenta
-    template_name='Cuentas/catalogoCuentas.html'
+
+def listaActivos(request):
+    listaAct = cuenta.objects.filter(tipo_cuenta=1)
+    return render(request,'Cuentas/listaActivos.html',{'listaAct':listaAct})
+
+def listaPasivos(request):
+    listaPas = cuenta.objects.filter(tipo_cuenta=2)
+    return render(request,'Cuentas/listaPasivos.html',{'listaPas':listaPas})
+
+def listaPatrimonio(request):
+    listaPatr = cuenta.objects.filter(tipo_cuenta=3)
+    return render(request,'Cuentas/listaPatrimonio.html',{'listaPatr':listaPatr})
+
+def catalogoCuentas(request):
+    listaAct = cuenta.objects.filter(tipo_cuenta=1)
+    listaPas = cuenta.objects.filter(tipo_cuenta=2)
+    listaPatr = cuenta.objects.filter(tipo_cuenta=3)
+    return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr})
 
 class cuentaCreate(CreateView):
     model = cuenta
     template_name = 'Cuentas/cuentaCrear.html' 
     form_class = cuentaForm
-    success_url = reverse_lazy('asiento:libroDiario')
+    success_url = reverse_lazy('asiento:catalogo_cuentas')
 
 
 class listarLibroDiario(ListView):
