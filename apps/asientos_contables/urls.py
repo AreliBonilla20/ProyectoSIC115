@@ -11,8 +11,7 @@ urlpatterns = [
     url(r'^catalogo/$',catalogoCuentas,name='catalogo_cuentas'),
     url(r'^catalogoActivos/$',listaActivos,name='catalogo_activos'),
     url(r'^catalogoPasivos/$',listaPasivos,name='catalogo_pasivos'),
-    url(r'^catalogoPatrimonio/$',listaPatrimonio,name='catalogo_patrimonio'),
-    url(r'^elementoMayor/$', elementoMayorCreate.as_view(), name='nuevo_elementoMayor'), 
-    url(r'^elementoComprobacion/(?P<id_balance>\d+)/$',elementoBalanceComprobacionCreate.as_view(),name='elemento_nuevo'),
+    url(r'^catalogoPatrimonio/$',listaPatrimonio,name='catalogo_patrimonio'), 
     url(r'^libroMayor/$',listarElementosMayor.as_view(),name='listarLibroMayor'),
+    url(r'^cerrarPeriodo/$',cerrarPeriodoContable,name='cierre'),
 ]

@@ -40,7 +40,6 @@ class libroMayor(models.Model):
         return '{}'.format(self.nombre_cuenta)
 
 class elementoMayor(models.Model):
-    fecha=models.DateField()
     debe=models.DecimalField(max_digits=8,decimal_places=3)
     haber=models.DecimalField(max_digits=8,decimal_places=3)
     mayor=models.ForeignKey(libroMayor,null=False,blank=False,on_delete=models.CASCADE)
@@ -60,13 +59,8 @@ class libroMayores(models.Model):
 class balanceComprobacion(models.Model):
     totalSumaDebe=models.DecimalField(max_digits=8,decimal_places=2)
     totalSumaHaber=models.DecimalField(max_digits=8,decimal_places=2)
-    totalSaldoDebe=models.DecimalField(max_digits=8,decimal_places=2)
-    totalSaldoHaber=models.DecimalField(max_digits=8,decimal_places=2)
-    
+ 
 class elementoBalanceComprobacion(models.Model):
     cuentas=models.ForeignKey(cuenta,null=False,blank=False,on_delete=models.CASCADE)
-    balance=models.ForeignKey(balanceComprobacion,null=False,blank=False,on_delete=models.CASCADE)
     sumaDebe=models.DecimalField(max_digits=8,decimal_places=2)
     sumaHaber=models.DecimalField(max_digits=8,decimal_places=2)
-    #saldoDebe=models.DecimalField(max_digits=8,decimal_places=2)
-    #saldoHaber=models.DecimalField(max_digits=8,decimal_places=2)   

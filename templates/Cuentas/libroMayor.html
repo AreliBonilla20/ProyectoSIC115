@@ -8,8 +8,6 @@ Libro Mayor
 {% block content %}
 <title>{% block Title %}Libro Mayor{% endblock %}</title>
 
-<a href="{% url 'asiento:nuevo_elementoMayor' %}" type="submit" class="btn btn-primary">Elemento mayor</a>
-
 <table class="table table-bo"> 
 	<thead class="thead-light">
 	<tr>		
@@ -24,7 +22,7 @@ Libro Mayor
 				{% if object_list %}
 					{% for elemento in object_list %}
 					<tr>
-						<td>{{elemento.mayor}}</td>
+						<td>{{elemento.mayor.nombre_cuenta}}</td>
 						<td>{{elemento.debe}}</td>
 						<td>{{elemento.haber}}</td>
 						<td>{{elemento.saldo}}</td>

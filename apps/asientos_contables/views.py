@@ -75,45 +75,32 @@ class listarElementosMayor(ListView):
     model=elementoMayor
     template_name='Cuentas/libroMayor.html'
 
-class elementoMayorCreate(CreateView):
-    model=elementoMayor
-    second_model=libroMayor
-    form_class=elementoMayorForm
-    second_form_class=libroMayorForm
-    template_name='Cuentas/elementoMayorCrear.html'
-    success_url=reverse_lazy('asiento:listarLibroMayor')
-
-    def get_context_data(self,**kwargs):
-        context = super(elementoMayorCreate,self).get_context_data(**kwargs)
-        if 'form' not in  context:
-            context['form'] = self.form_class(self.request.GET)
-
-        if 'form2' not in context:
-            context['form2'] = self.second_form_class(self.request.GET)
-            return context
-
-    def post(self,request,*args,**kwargs):
-        self.object = self.get_object
-        form = self.form_class(request.POST)
-        form2 = self.second_form_class(request.POST)
-        #form3 = self.third_form_class(request.POST)
-
-        if form.is_valid() and form2.is_valid():
-            elemento = form.save(commit=False)
-            elemento.mayor = form2.save()
-            elemento.save()
-            return HttpResponseRedirect(self.get_success_url())
-
-        else:
-            return self.render_to_response(self.get_context_data(form=form,form2=form2))
-
-class elementoBalanceComprobacionCreate(CreateView):
-    model=elementoBalanceComprobacion
-    form_class=elementoBalanceComprobacionForm
-    template_name='Cuentas/elementoComprobacionCrear.html'
-    success_url=reverse_lazy('asiento:elemento_nuevo')
-
-    def get_initial(self):
-      initial=super().get_initial()
-      initial['balance']=self.kwargs['id_balance']
-      return initial
+def cerrarPeriodoContable(request):
+  cuentas=cuenta.objects.all()
+  asientos=asientoContable.objects.all()
+  if cuentas:
+    for c in cuentas:
+      cuenta_id=c.id
+      totalDebe=0
+      totalHaber=0
+      if asientos:
+        for a in asientos:
+          cuenta_debe=a.cuenta_debe.id
+          if cuenta_id==cuenta_debe:
+            totalDebe+=a.importeDebe
+            
+        for a in asientos:
+          cuenta_haber=a.cuenta_haber.id
+          if cuenta_id==cuenta_haber:
+            totalHaber+=a.importeHaber
+        
+        bill=cuenta.objects.get(id=c.id)
+        elemento=elementoMayor()
+        libro=libroMayor()
+        libro.nombre_cuenta=bill
+        libro.save()
+        elemento.debe=totalDebe
+        elemento.haber=totalHaber
+        elemento.mayor=libro
+        elemento.save()
+  return redirect('asiento:listarLibroMayor')
