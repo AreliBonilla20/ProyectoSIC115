@@ -8,7 +8,8 @@ class tipoCuenta(models.Model):
         return '{}'.format(self.tipo)
 
 class cuenta(models.Model):
-    codigo=models.IntegerField()
+    codigo=models.CharField(max_length=25)
+    subcuenta=models.CharField(max_length=50, null=True)
     nombre = models.CharField(max_length=50)
     tipo_cuenta=models.ForeignKey(tipoCuenta,null=False,blank=False,on_delete=models.CASCADE)
 

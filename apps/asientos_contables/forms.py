@@ -39,6 +39,7 @@ class cuentaForm(forms.ModelForm):
 		'codigo',
 		'nombre',
 		'tipo_cuenta',
+		'subcuenta',
 
 		
 		]
@@ -47,12 +48,14 @@ class cuentaForm(forms.ModelForm):
 		'codigo': 'Código',
 		'nombre':'Nombre',
 		'tipo_cuenta':'Seleccione el tipo de cuenta',
+		'subcuenta':'Subcuenta',
 		}
 
 		widgets={
-		'codigo':forms.NumberInput(attrs={'class':'form-control'}),
+		'codigo':forms.TextInput(attrs={'class':'form-control'}),
 		'nombre':forms.TextInput(attrs={'class':'form-control'}),
 		'tipo_cuenta':forms.Select(attrs={'class':'form-control'}),
+		'subcuenta':forms.TextInput(attrs={'class':'form-control'}),
 		}
 
 class tipoCuentaForm(forms.ModelForm):
