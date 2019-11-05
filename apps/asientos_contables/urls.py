@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^catalogoActivos/$',listaActivos,name='catalogo_activos'),
     url(r'^catalogoPasivos/$',listaPasivos,name='catalogo_pasivos'),
     url(r'^catalogoPatrimonio/$',listaPatrimonio,name='catalogo_patrimonio'), 
+    url(r'^catalogoIngresos/$',listaIngresos,name='catalogo_ingresos'), 
+    url(r'^catalogoGastos/$',listaGastos,name='catalogo_gastos'), 
     url(r'^libroMayor/$',listarElementosMayor.as_view(),name='listarLibroMayor'),
     url(r'^cerrarPeriodo/$',cerrarPeriodoContable,name='cierre'),
 ]

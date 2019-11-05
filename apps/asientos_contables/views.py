@@ -23,11 +23,21 @@ def listaPatrimonio(request):
     listaPatr = cuenta.objects.filter(tipo_cuenta=3)
     return render(request,'Cuentas/listaPatrimonio.html',{'listaPatr':listaPatr})
 
+def listaIngresos(request):
+    listaIng = cuenta.objects.filter(tipo_cuenta=4)
+    return render(request,'Cuentas/listaIngresos.html',{'listaIng':listaIng})
+
+def listaGastos(request):
+    listaGast = cuenta.objects.filter(tipo_cuenta=5)
+    return render(request,'Cuentas/listaGastos.html',{'listaGast':listaGast})
+
 def catalogoCuentas(request):
     listaAct = cuenta.objects.filter(tipo_cuenta=1)
     listaPas = cuenta.objects.filter(tipo_cuenta=2)
     listaPatr = cuenta.objects.filter(tipo_cuenta=3)
-    return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr})
+    listaIng = cuenta.objects.filter(tipo_cuenta=4)
+    listaGast = cuenta.objects.filter(tipo_cuenta=5)
+    return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr,'listaIng':listaIng,'listaGast':listaGast})
 
 class cuentaCreate(CreateView):
     model = cuenta

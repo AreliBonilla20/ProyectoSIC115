@@ -23,8 +23,10 @@ Catalogo de cuentas
 		<li><a href="{% url 'asiento:catalogo_activos' %}"><h5><strong>Activos</strong></h5></a></li>
 		<li><a href="{% url 'asiento:catalogo_pasivos' %}"><h5><strong>Pasivos</strong></h5></a></li>
 		<li><a href="{% url 'asiento:catalogo_patrimonio' %}"><h5><strong>Patrimonio</strong></h5></a></li>
+		<li><a href="{% url 'asiento:catalogo_ingresos' %}"><h5><strong>Ingresos</strong></h5></a></li>
+		<li><a href="{% url 'asiento:catalogo_gastos' %}"><h5><strong>Gastos</strong></h5></a></li>
 		
-	</ul>
+</ul>
 
 <br><br>
 
@@ -116,6 +118,60 @@ Catalogo de cuentas
 								
 	</table>
 
+
+<br><br>
+<table class="table table-bo"> 
+		<thead class="thead-light">
+		<h3>Ingresos</h3>
+		<tr>	
+		<th scope="col"><h4><strong>Código</strong></h4></th>
+		<th scope="col"><h4><strong>Nombre</strong></h4></th>
+		<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+		
+		</tr>
+			</thead>
+					<tbody>
+					{% if listaIng %}
+						{% for i in listaIng %}
+						<tr>
+							<td>{{i.codigo}}</td>
+							<td>{{i.nombre }}</td>
+							<td>{{i.subcuenta}}</td>
+						</tr>
+						{% endfor %}
+					{% else %}
+					No hay cuentas registradas
+					{% endif %}
+					</tbody>	 
+								
+</table>
+
+<br><br>
+<table class="table table-bo"> 
+		<thead class="thead-light">
+		<h3>Gastos</h3>
+		<tr>	
+		<th scope="col"><h4><strong>Código</strong></h4></th>
+		<th scope="col"><h4><strong>Nombre</strong></h4></th>
+		<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+		
+		</tr>
+			</thead>
+					<tbody>
+					{% if listaGast %}
+						{% for i in listaGast %}
+						<tr>
+							<td>{{i.codigo}}</td>
+							<td>{{i.nombre }}</td>
+							<td>{{i.subcuenta}}</td>
+						</tr>
+						{% endfor %}
+					{% else %}
+					No hay cuentas registradas
+					{% endif %}
+					</tbody>	 
+								
+	</table>
 
 </div>
 </div>
