@@ -114,3 +114,16 @@ def cerrarPeriodoContable(request):
         elemento.mayor=libro
         elemento.save()
   return redirect('asiento:listarLibroMayor')
+
+def resultados(request):
+    ingresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4)
+    gastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5)
+    monto_ingresos=0
+    monto_gastos=0
+    utilidad=0
+    for i in ingresos:
+        monto_ingresos += i.saldo
+    for i in gastos:
+        monto_gastos += i.saldo
+    utilidad=monto_ingresos-monto_gastos
+    return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad})
