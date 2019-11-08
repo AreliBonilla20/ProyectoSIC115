@@ -1,0 +1,64 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro Mayor{% endblock %}</title>
+
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	<tr>		
+	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+	<th scope="col"><h4><strong>Ingresos</strong></h4></th>
+	<th scope="col"><h4><strong>Gastos</strong></h4></th>
+	
+	</tr>
+		</thead>
+				<tbody>
+					<br>
+					
+				{% if ingresos %}
+					{% for elemento in ingresos %}
+					<tr>
+						<td>{{elemento.mayor.nombre_cuenta}}</td>
+						<td>$ {{elemento.saldo}}</td>
+					</tr>
+					{% endfor %}
+						
+				{% else %}
+				No hay cuentas registradas
+				{% endif %}
+
+				{% if gastos %}
+					{% for elemento in gastos %}
+					<tr>
+						<td>{{elemento.mayor.nombre_cuenta}}</td>
+						<td></td>
+						<td>$ {{elemento.saldo}}</td>
+					</tr>
+					{% endfor %}
+	
+				{% else %}
+				No hay cuentas registradas
+				{% endif %}
+				<br>
+				<td></td>
+				<td><strong>$ {{monto_ingresos}}</strong></td>
+				<td><strong>$ {{monto_gastos}}</strong></td>
+
+
+				<tr>
+
+					<td><strong>UTILIDAD</strong></td>
+					<td><strong>$ {{utilidad}}</strong></td>
+				</tr>
+				
+				</tbody>	 
+
+				
+							
+</table>
+{% endblock %}
