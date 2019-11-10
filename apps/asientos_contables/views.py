@@ -127,3 +127,47 @@ def resultados(request):
         monto_gastos += i.saldo
     utilidad=monto_ingresos-monto_gastos
     return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad})
+
+def flujocapital(request):
+    listaFlujoCapital = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3)
+    montoFlujoCapital = 0
+    for l in listaFlujoCapital:
+        montoFlujoCapital+=l.saldo
+    
+    return render(request,'Cuentas/estadoFlujoCapital.html',{'listaFlujoCapital':listaFlujoCapital,'montoFlujoCapital':montoFlujoCapital})
+
+
+def balanceGeneral(request):
+    listaActivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=1)
+    listaPasivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=2)
+    listaPatrimonio = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3)
+    listaIngresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4)
+    listaGastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5)
+    montoActivos = 0
+    montoPasivos = 0
+    montoPatrimonio = 0
+    montoIngresos=0
+    montoGastos=0
+    montoUtilidad=0
+    montoPasivosPatrimonioUtilidad = 0
+
+    for i in listaActivos:
+        montoActivos += i.saldo
+
+    for i in listaPasivos:
+        montoPasivos += i.saldo
+
+    for i in listaPatrimonio:
+        montoPatrimonio += i.saldo
+
+    for i in listaIngresos:
+        montoIngresos += i.saldo
+
+    for i in listaGastos:
+        montoGastos += i.saldo
+
+    montoUtilidad = montoIngresos-montoGastos
+    montoPasivosPatrimonioUtilidad =montoPasivos + montoPatrimonio + montoUtilidad
+
+    return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad})
+    

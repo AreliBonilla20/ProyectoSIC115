@@ -24,7 +24,6 @@ class libroDiario(models.Model):
         return '{}'.format(self.fecha)  
 
 class asientoContable(models.Model):
-    numero_asiento=models.IntegerField()
     libroD=models.ForeignKey(libroDiario,null=False,blank=False,on_delete=models.CASCADE)
     cuenta_debe=models.ForeignKey(cuenta,null=False,blank=False,on_delete=models.CASCADE,related_name='cuenta_debe')
     importeDebe=models.DecimalField(max_digits=8,decimal_places=2)

@@ -12,7 +12,7 @@ Nueva cuenta
 		
 			<div class="form-title">
 					<div class="panel panel-default">
-							<div class="panel-body" style="text-align: center; background: #ebecf0; font-family:Arial, Helvetica, sans-serif;">
+							<div class="panel-body" style="text-align: center; background: #fbfbfb; font-family:Arial, Helvetica, sans-serif;">
 							  <h4><strong>Agregar nueva cuenta</strong></h4>
 									  
 							</div>
@@ -23,20 +23,20 @@ Nueva cuenta
 				<div class="col-md-7">
 			<div class="form-body">
 				<br><br>
-			<form class="form-vertical" method="POST" action="{% url 'asiento:nueva_cuenta' %}"> 
+			<form class="form-horizontal" method="POST" action="{% url 'asiento:nueva_cuenta' %}"> 
 					<div class="form-group">
 					{%csrf_token %}
 					{{form2.as_p}}
 					 {{form.as_p}}
 					 <br><br> 
-					 <button type="submit" class="btn btn-primary" style="font-weight: bold;">Guardar</button>
+					 <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;">Guardar</button>
 					</div>
 			</form> 
 			
 			</div>
 			</div>
 			
-			<img  style='position: absolute; right: 17.5%; top: 40%;' src="{% static 'images/agregar.png' %}" width="100px" height="100px">
+			<img  style='position: absolute; right: 17.5%; top: 40%;' src="{% static 'images/agregar.png' %}" width="75px" height="75px">
 		
 			</div>
 			

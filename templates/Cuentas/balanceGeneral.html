@@ -1,0 +1,124 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro Mayor{% endblock %}</title>
+
+<div class="col-md-6">
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	
+		</thead>
+				<tbody>
+               
+                
+                <td><h4><strong>ACTIVOS</strong></h4></td>	
+				{% if listaActivos %}
+					{% for i in listaActivos %}
+					<tr>
+						<td>{{i.mayor.nombre_cuenta}}</td>
+						<td>$ {{i.saldo}}</td>
+					</tr>
+					{% endfor %}
+						
+				{% else %}
+				No hay cuentas registradas
+                {% endif %}
+
+                <tr>
+
+					<td><strong>Total activos</strong></td>
+					<td><strong>$ {{montoActivos}}</strong></td>
+                </tr>
+            </tbody>	 			
+</table>
+</div>
+
+<div class="col-md-6">
+    <table class="table table-bo"> 
+        <thead class="thead-light">
+        
+            </thead>
+                    <tbody>
+                      
+                    
+                <td><h4><strong>PASIVOS</strong></h4></td>
+                {% if listaPasivos %}
+					{% for i in listaPasivos %}
+					<tr>
+						<td>{{i.mayor.nombre_cuenta}}</td>
+						<td>$ {{i.saldo}}</td>
+					</tr>
+					{% endfor %}
+						
+				{% else %}
+				No hay cuentas registradas
+                {% endif %}
+                
+                <tr>
+
+					<td><strong>Total pasivos</strong></td>
+					<td><strong>$ {{montoPasivos}}</strong></td>
+                </tr>
+
+            </tbody>	 			
+</table>
+</div>
+
+
+<div class="col-md-6">
+    <table class="table table-bo"> 
+        <thead class="thead-light">
+        
+            </thead>
+                    <tbody>
+                      
+                   
+
+                <td><h4><strong>PATRIMONIO</strong></h4></td>
+                {% if listaPatrimonio %}
+					{% for i in listaPatrimonio %}
+					<tr>
+						<td>{{i.mayor.nombre_cuenta}}</td>
+						<td>$ {{i.saldo}}</td>
+					</tr>
+					{% endfor %}
+						
+				{% else %}
+				No hay cuentas registradas
+				{% endif %}
+
+
+
+                <tr>
+
+					<td><strong>Total capital</strong></td>
+                    <td><strong>$ {{montoPatrimonio}}</strong></td>
+                    
+                </tr>
+                <tr>
+
+					<td><strong>Utilidad</strong></td>
+                    <td><strong>$ {{montoUtilidad}}</strong></td>
+                    
+                </tr>
+				
+                </tbody>	
+
+                
+                 							
+</table>
+</div>
+
+<div class="col-md-6">
+<h4>Total activos : <strong>$ {{montoActivos}}</strong></h4>
+<h4>Total pasivos + patrimonio : <strong>$ {{montoPasivosPatrimonioUtilidad}}</strong></h4>
+
+</div>
+
+
+{% endblock %}

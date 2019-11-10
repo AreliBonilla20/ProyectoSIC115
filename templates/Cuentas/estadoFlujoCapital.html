@@ -1,0 +1,48 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Libro Mayor{% endblock %}</title>
+
+<table class="table table-bo"> 
+	<thead class="thead-light">
+	<tr>		
+	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+	<th scope="col"><h4><strong>Monto</strong></h4></th>
+	
+	
+	</tr>
+		</thead>
+				<tbody>
+					<br>
+					
+				{% if listaFlujoCapital %}
+					{% for i in listaFlujoCapital %}
+					<tr>
+						<td>{{i.mayor.nombre_cuenta}}</td>
+						<td>$ {{i.saldo}}</td>
+					</tr>
+					{% endfor %}
+						
+				{% else %}
+				No hay cuentas registradas
+				{% endif %}
+
+
+
+				<tr>
+
+					<td><strong>TOTAL</strong></td>
+					<td><strong>$ {{montoFlujoCapital}}</strong></td>
+				</tr>
+				
+				</tbody>	 
+
+				
+							
+</table>
+{% endblock %}

@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^libroMayor/$',listarElementosMayor.as_view(),name='listarLibroMayor'),
     url(r'^cerrarPeriodo/$',cerrarPeriodoContable,name='cierre'),
     url(r'^estadoResultados/$',resultados,name='estado_Resultados'),
+    url(r'^estadoFlujoCapital/$',flujocapital,name='estado_flujo_capital'),
+    url(r'^balanceGeneral/$',balanceGeneral,name='balance_general'),
 ]

@@ -7,7 +7,6 @@ class asientoContableForm(forms.ModelForm):
 		model = asientoContable
 
 		fields=[
-		'numero_asiento',
 		'cuenta_debe',
 		'importeDebe',
 		'cuenta_haber',
@@ -17,7 +16,6 @@ class asientoContableForm(forms.ModelForm):
 		]
 
 		labels={
-		'numero_asiento':'N° asiento',
 		'cuenta_debe':'Cuenta a cargar',
 		'importeDebe':'Debe (Monto en $)',
 		'cuenta_haber':'Cuenta a abonar',
@@ -25,7 +23,6 @@ class asientoContableForm(forms.ModelForm):
 		}
 
 		widgets={
-		'numero_asiento':forms.NumberInput(attrs={'class':'form-control'}),
 		'cuenta_debe':forms.Select(attrs={'class':'form-control'}),
 		'importeDebe':forms.NumberInput(attrs={'class':'form-control'}),
 		'cuenta_haber':forms.Select(attrs={'class':'form-control'}),
