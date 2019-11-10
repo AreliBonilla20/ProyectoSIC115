@@ -7,6 +7,7 @@ app_name='asientos_contables'
 urlpatterns = [
     url(r'^asientoCrear/$',asientoContableCrear.as_view(),name='nuevo_asientoContable'),
     url(r'^libroDiario/$',listarLibroDiario.as_view(),name='libroDiario'),
+    url(r'^transacciones/$',listaTransacciones,name='lista_transacciones'),
     url(r'^cuentaCrear/$', cuentaCreate.as_view(), name='nueva_cuenta'),
     url(r'^catalogo/$',catalogoCuentas,name='catalogo_cuentas'),
     url(r'^catalogoActivos/$',listaActivos,name='catalogo_activos'),

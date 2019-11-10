@@ -6,10 +6,27 @@ Libro Mayor
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Libro Mayor{% endblock %}</title>
+<title>{% block Title %}Balance general{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 120%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+<div class="container">
+<div class="form-title">
+	<div class="panel panel-default">
+			<div class="panel-body" style="text-align: center; background: #fbfbfb;">
+			  <h4><strong>Balance general</strong></h4>
+					  
+			</div>
+	</div>
+</div>
 
+<div class="container" style="position: absolute; left: 5%;">
+	<div class="col-md-11">
+				<br><br><br><br>
+				<h3><strong>González Orellana S.A</strong></h3>
+				<h5><strong>BALANCE GENERAL</strong></h5>
+				<h5><strong>Del 1 al 30 de noviembre</strong></h5>
+				<br>
 <div class="col-md-6">
-<table class="table table-bo"> 
+<table class="table table-hover"> 
 	<thead class="thead-light">
 	
 		</thead>
@@ -31,7 +48,7 @@ Libro Mayor
 
                 <tr>
 
-					<td><strong>Total activos</strong></td>
+					<td><strong>TOTAL ACTIVOS</strong></td>
 					<td><strong>$ {{montoActivos}}</strong></td>
                 </tr>
             </tbody>	 			
@@ -39,7 +56,7 @@ Libro Mayor
 </div>
 
 <div class="col-md-6">
-    <table class="table table-bo"> 
+    <table class="table table-hover"> 
         <thead class="thead-light">
         
             </thead>
@@ -61,7 +78,7 @@ Libro Mayor
                 
                 <tr>
 
-					<td><strong>Total pasivos</strong></td>
+					<td><strong>TOTAL PASIVOS</strong></td>
 					<td><strong>$ {{montoPasivos}}</strong></td>
                 </tr>
 
@@ -71,7 +88,7 @@ Libro Mayor
 
 
 <div class="col-md-6">
-    <table class="table table-bo"> 
+    <table class="table table-hover"> 
         <thead class="thead-light">
         
             </thead>
@@ -96,13 +113,13 @@ Libro Mayor
 
                 <tr>
 
-					<td><strong>Total capital</strong></td>
+					<td><strong>TOTAL PATRIMONIO</strong></td>
                     <td><strong>$ {{montoPatrimonio}}</strong></td>
                     
                 </tr>
                 <tr>
 
-					<td><strong>Utilidad</strong></td>
+					<td><strong>UTILIDAD</strong></td>
                     <td><strong>$ {{montoUtilidad}}</strong></td>
                     
                 </tr>
@@ -118,6 +135,11 @@ Libro Mayor
 <h4>Total activos : <strong>$ {{montoActivos}}</strong></h4>
 <h4>Total pasivos + patrimonio : <strong>$ {{montoPasivosPatrimonioUtilidad}}</strong></h4>
 
+<br><br><br><br>
+
+</div>
+</div>
+</div>
 </div>
 
 

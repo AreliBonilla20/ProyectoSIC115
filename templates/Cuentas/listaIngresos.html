@@ -6,11 +6,13 @@ Catalogo de cuentas
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Catalogo de cuentas{% endblock %}</title>
+<title>{% block Title %}Catálogo de cuentas{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 100%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+
 <div class="container">
 <div class="form-title">
 	<div class="panel panel-default">
-			<div class="panel-body" style="text-align: center; background: #ebecf0;">
+			<div class="panel-body" style="text-align: center; background: #fbfbfb;">
 			  <h4><strong>Catálogo de cuentas</strong></h4>
 					  
 			</div>
@@ -29,39 +31,44 @@ Catalogo de cuentas
 
 <br><br>
 
-<a href=""><img  style='position: absolute; right: 12%; top: 70%;' src="{% static 'images/pdf.png' %}" width="100px" height="100px"></a>
 
-<div class="container-fluid">
-<div class="row">
-<div class="col-md-8">
-<table class="table table-bo"> 
-	<thead class="thead-light">
-	<h3>Ingresos</h3>
-	<tr>	
-	<th scope="col"><h4><strong>Código</strong></h4></th>
-	<th scope="col"><h4><strong>Nombre</strong></h4></th>
-	<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+<div class="container" style="position: absolute; left: 5%;">
+		<div class="row">
+		<div class="col-md-9">
+		<table class="table table-hover"> 
+			<thead class="thead-light">
+			<h3>Ingresos</h3>
+			<tr>	
+			<th scope="col"><h4><strong>Código</strong></h4></th>
+			<th scope="col"><h4><strong>Nombre</strong></h4></th>
+			<th scope="col"><h4><strong>Subcuenta</strong></h4></th>
+			
+			
+			</tr>
+				</thead>
+						<tbody>
+						{% if listaIng %}
+							{% for i in listaIng %}
+							<tr>
+								<td>{{i.codigo}}</td>
+								<td>{{i.nombre }}</td>
+								<td>{{i.subcuenta}}</td>
+								
+							</tr>
+							{% endfor %}
+						{% else %}
+						No hay cuentas registradas
+						{% endif %}
+						</tbody>	 
+									
+		</table>
+		</div>
+		</div>
+		
+		
+		<br><br>
 	
-	</tr>
-		</thead>
-				<tbody>
-				{% if listaIng %}
-					{% for i in listaIng %}
-					<tr>
-						<td>{{i.codigo}}</td>
-						<td>{{i.nombre }}</td>
-						<td>{{i.subcuenta}}</td>
-					</tr>
-					{% endfor %}
-				{% else %}
-				No hay cuentas registradas
-				{% endif %}
-				</tbody>	 
-							
-</table>
+		</div>
 </div>
-</div>
-</div>
-
 
 {% endblock %}

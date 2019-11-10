@@ -39,6 +39,10 @@ def catalogoCuentas(request):
     listaGast = cuenta.objects.filter(tipo_cuenta=5)
     return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr,'listaIng':listaIng,'listaGast':listaGast})
 
+def listaTransacciones(request):
+    lista = asientoContable.objects.all()
+    return render(request, 'Cuentas/listaAsientos.html',{'lista':lista})
+
 class cuentaCreate(CreateView):
     model = cuenta
     template_name = 'Cuentas/cuentaCrear.html' 
@@ -49,6 +53,7 @@ class cuentaCreate(CreateView):
 class listarLibroDiario(ListView):
     model=asientoContable
     template_name='Cuentas/libroDiario.html'
+
 
 class asientoContableCrear(CreateView):
     model = asientoContable

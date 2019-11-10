@@ -6,43 +6,68 @@ Libro Mayor
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Libro Mayor{% endblock %}</title>
+<title>{% block Title %}Estado de flujo de efectivo de capital{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 120%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+<div class="container">
+<div class="form-title">
+	<div class="panel panel-default">
+			<div class="panel-body" style="text-align: center; background: #fbfbfb;">
+			  <h4><strong>Estado de flujo de efectivo de capital</strong></h4>
+					  
+			</div>
+	</div>
+</div>
 
-<table class="table table-bo"> 
-	<thead class="thead-light">
-	<tr>		
-	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
-	<th scope="col"><h4><strong>Monto</strong></h4></th>
-	
-	
-	</tr>
-		</thead>
-				<tbody>
-					<br>
-					
-				{% if listaFlujoCapital %}
-					{% for i in listaFlujoCapital %}
-					<tr>
-						<td>{{i.mayor.nombre_cuenta}}</td>
-						<td>$ {{i.saldo}}</td>
-					</tr>
-					{% endfor %}
+<div class="container" style="position: absolute; left: 14%;">
+		<div class="row">
+		<div class="col-md-8">
+		<br><br><br><br>
+		<h3><strong>González Orellana S.A</strong></h3>
+		<h5><strong>ESTADO DE FLUJO DE EFECTIVO DE CAPITAL</strong></h5>
+		<h5><strong>Del 1 al 30 de noviembre</strong></h5>
+		<table class="table table-hover" style="position: absolute; left: 5%;"> 
+				<thead class="thead-light">
+						<tr>		
+						<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+						<th scope="col"><h4><strong>Monto</strong></h4></th>
 						
-				{% else %}
-				No hay cuentas registradas
-				{% endif %}
+						
+						</tr>
+							</thead>
+									<tbody>
+										<br>
+										
+									{% if listaFlujoCapital %}
+										{% for i in listaFlujoCapital %}
+										<tr>
+											<td>{{i.mayor.nombre_cuenta}}</td>
+											<td>$ {{i.saldo}}</td>
+										</tr>
+										{% endfor %}
+											
+									{% else %}
+									No hay cuentas registradas
+									{% endif %}
+					
+					
+					
+									<tr>
+					
+										<td><strong>TOTAL</strong></td>
+										<td><strong>$ {{montoFlujoCapital}}</strong></td>
+									</tr>
+									
+									</tbody>	
+		</table>
+		</div>
+		</div>
+		
+		
+		<br><br>
+		<br><br>
+	
+	
+</div>
+</div>
 
-
-
-				<tr>
-
-					<td><strong>TOTAL</strong></td>
-					<td><strong>$ {{montoFlujoCapital}}</strong></td>
-				</tr>
-				
-				</tbody>	 
-
-				
-							
-</table>
 {% endblock %}

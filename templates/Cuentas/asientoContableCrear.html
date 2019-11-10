@@ -6,20 +6,20 @@ Nueva cuenta
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Nueva asiento contable{% endblock %}</title>
+<title>{% block Title %}Nuevo asiento contable{% endblock %}</title>
 
 <div class=" form-grids row form-grids-right">
 		
 			<div class="form-title">
 					<div class="panel panel-default">
-							<div class="panel-body" style="text-align: center; background: #ebecf0; font-family:Arial, Helvetica, sans-serif;">
+							<div class="panel-body" style="text-align: center; background: #fbfbfb;">
 							  <h4><strong>Agregar nuevo asiento contable</strong></h4>
 									  
 							</div>
 					</div>
 			</div>
 
-			<img  style='position: absolute; right: 17.5%; top: 70%;' src="{% static 'images/agregar.png' %}" width="100px" height="100px">
+			<img  style='position: absolute; right: 23%; top: 80%;' src="{% static 'images/agregar.png' %}" width="75px" height="75px">
 
 			<div class="container-fluid">
 				<div class="col-md-12">
@@ -34,16 +34,17 @@ Nueva cuenta
 						}
 					</style>
 					{%csrf_token %}
-					<div class="col-md-7">
+					<div class="col-md-6">
 					{{form.as_p}}
 					</div>
 
-					<div class="col-md-4"style="position: absolute; right: 5%; top: 1%;">
+					<div class="col-md-5"style="position: absolute; right: 5%; top: 1%;">
 					{{form2.as_p}}
 					</div>
 					 <br><br>
 					 <div style="position: absolute; left: 2%; top: 100%;">
-					 <button type="submit" class="btn btn-primary">Guardar</button>
+							<button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
+							onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Guardar</button>
 					 
 					</div> 
 					

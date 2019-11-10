@@ -6,59 +6,50 @@ Libro Diario
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Libro Diario{% endblock %}</title>
+<title>{% block Title %}Asientos contables realizados{% endblock %}</title>
 
-<div class=" form-grids row form-grids-right">
-		
-			<div class="form-title">
-				<h4>Libro Diario</h4>
+<a href="{% url 'asiento:nuevo_asientoContable' %}" type="submit" style="position: absolute; right: 3%; top: 17%;"> <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
+	onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Agregar nuevo asiento contable</button></a>
+
+<div class="container-fluid">
+		<div class="form-title">
+			<div class="panel panel-default">
+					<div class="panel-body" style="text-align: center; background: #fbfbfb;">
+					  <h4><strong>Asientos contables registrados</strong></h4>
+							  
+					</div>
 			</div>
-			<div class="form-body">
-			<form class="form-horizontal" method="POST"> 
-					<div class="form-group">
-					{% csrf_token %}
-					 <br><br>
-					 <a href="#" type="submit" class="btn btn-primary">Agregar asiento contable</a>
-				 	</div>
-				 </form> 
-			</div>
-		
-</div>
+		</div>
 
+<br><br>
 
-<table class="table table-bo"> 
+<br><br>
+
+<table class="table table-hover"> 
 	<thead class="thead-light">
 	<tr>
 	<th scope="col"><h4><strong>N° asiento</strong></h4></th>		
 	<th scope="col"><h4><strong>Fecha</strong></h4></th>
-	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
-	<th scope="col"><h4><strong>Detalle</strong></h4></th>
-	<th scope="col"><h4><strong>Debe</strong></h4></th>
-	<th scope="col"><h4><strong>Haber</strong></h4></th>
-
+	<th scope="col"><h4><strong>Concepto</strong></h4></th>
+	<th scope="col"><h4><strong>Cuenta debe</strong></h4></th>
+	<th scope="col"><h4><strong>Monto</strong></h4></th>
+	<th scope="col"><h4><strong>Cuenta haber</strong></h4></th>
+	<th scope="col"><h4><strong>Monto</strong></h4></th>
+	
 	</tr>
 		</thead>
 				<tbody>
-				{% if object_list %}
-					{% for asiento in object_list %}
+				{% if lista %}
+					{% for asiento in lista %}
 					<tr>
-						<td>{{asiento.numero_asiento}}</td>
-						<td>{{asiento.fecha}}</td>
-						<td>{{ asiento.cuenta_debe}}
-						<br><br>
-						{{asiento.cuenta_haber}}
-						</td>
-						<td>{{ asiento.detalle_debe}}
-						<br><br>
-						{{asiento.detalle_haber}}
-						</td>
+						<td>{{asiento.id}}</td>
+						<td>{{asiento.libroD.fecha}}</td>
+						<td>{{asiento.libroD.concepto}}</td>
+						<td>{{asiento.cuenta_debe}}</td>
+						<td>$ {{asiento.importeDebe}}</td>
+						<td>{{asiento.cuenta_haber}}</td>
+						<td>$ {{asiento.importeHaber}}</td>
 						<td>
-						{{ asiento.debe}}
-						<br><br>
-						</td>
-						<td>
-						<br><br>
-						{{ asiento.haber}}
 						</td>
 					</tr>
 					{% endfor %}
@@ -68,4 +59,6 @@ Libro Diario
 				</tbody>	 
 							
 </table>
+</div>
 {% endblock %}
+

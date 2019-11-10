@@ -7,6 +7,7 @@ Catalogo de cuentas
 
 {% block content %}
 <title>{% block Title %}Catálogo de cuentas{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 80%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
 <div class="container">
 <div class="form-title">
 	<div class="panel panel-default">
@@ -30,12 +31,12 @@ Catalogo de cuentas
 
 <br><br>
 
-<a href=""><img  style='position: absolute; right: 12%; top: 30%;' src="{% static 'images/pdf.png' %}" width="100px" height="100px"></a>
 
-<div class="container-fluid">
+
+<div class="container" style="position: absolute; left: 5%;">
 <div class="row">
-<div class="col-md-8">
-<table class="table table-bo"> 
+<div class="col-md-9">
+<table class="table table-hover"> 
 	<thead class="thead-light">
 	<h3>Activos</h3>
 	<tr>	
@@ -62,10 +63,15 @@ Catalogo de cuentas
 				</tbody>	 
 							
 </table>
+</div>
+</div>
+
 
 <br><br>
 
-<table class="table table-bo"> 
+<div class="row">
+<div class="col-md-9">
+<table class="table table-hover"> 
 		<thead class="thead-light">
 		<h3>Pasivos</h3>
 		<tr>	
@@ -90,9 +96,13 @@ Catalogo de cuentas
 					</tbody>	 
 								
 </table>
+</div>
+</div>
 
 <br><br>
-<table class="table table-bo"> 
+<div class="row">
+		<div class="col-md-9">
+		<table class="table table-hover">  
 		<thead class="thead-light">
 		<h3>Patrimonio</h3>
 		<tr>	
@@ -117,10 +127,14 @@ Catalogo de cuentas
 					</tbody>	 
 								
 	</table>
+</div>
+</div>
 
 
 <br><br>
-<table class="table table-bo"> 
+<div class="row">
+		<div class="col-md-9">
+		<table class="table table-hover"> 
 		<thead class="thead-light">
 		<h3>Ingresos</h3>
 		<tr>	
@@ -145,9 +159,13 @@ Catalogo de cuentas
 					</tbody>	 
 								
 </table>
+</div>
+</div>
 
 <br><br>
-<table class="table table-bo"> 
+<div class="row">
+		<div class="col-md-9">
+		<table class="table table-hover"> 
 		<thead class="thead-light">
 		<h3>Gastos</h3>
 		<tr>	
@@ -176,7 +194,8 @@ Catalogo de cuentas
 </div>
 </div>
 </div>
-
+</div>
+<br><br>
 
 
 {% endblock %}

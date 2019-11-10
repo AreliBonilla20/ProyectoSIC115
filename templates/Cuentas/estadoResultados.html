@@ -6,59 +6,83 @@ Libro Mayor
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Libro Mayor{% endblock %}</title>
+<title>{% block Title %}Estado de resultados{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 120%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+<div class="container">
+<div class="form-title">
+	<div class="panel panel-default">
+			<div class="panel-body" style="text-align: center; background: #fbfbfb;">
+			  <h4><strong>Estado de resultados</strong></h4>
+					  
+			</div>
+	</div>
+</div>
 
-<table class="table table-bo"> 
-	<thead class="thead-light">
-	<tr>		
-	<th scope="col"><h4><strong>Cuenta</strong></h4></th>
-	<th scope="col"><h4><strong>Ingresos</strong></h4></th>
-	<th scope="col"><h4><strong>Gastos</strong></h4></th>
-	
-	</tr>
-		</thead>
-				<tbody>
-					<br>
-					
-				{% if ingresos %}
-					{% for elemento in ingresos %}
-					<tr>
-						<td>{{elemento.mayor.nombre_cuenta}}</td>
-						<td>$ {{elemento.saldo}}</td>
-					</tr>
-					{% endfor %}
+<div class="container" style="position: absolute; left: 14%;">
+		<div class="row">
+		<div class="col-md-9">
+		<br><br><br><br>
+		
+		<h3><strong>González Orellana S.A</strong></h3>
+		<h5><strong>ESTADO DE RESULTADOS</strong></h5>
+		<h5><strong>Del 1 al 30 de noviembre</strong></h5>
+		<table class="table table-hover"> 
+				<thead class="thead-light">
+						<tr>	
+								
+						<th scope="col"><h4><strong>Cuenta</strong></h4></th>
+						<th scope="col"><h4><strong>Ingresos</strong></h4></th>
+						<th scope="col"><h4><strong>Gastos</strong></h4></th>
 						
-				{% else %}
-				No hay cuentas registradas
-				{% endif %}
-
-				{% if gastos %}
-					{% for elemento in gastos %}
-					<tr>
-						<td>{{elemento.mayor.nombre_cuenta}}</td>
-						<td></td>
-						<td>$ {{elemento.saldo}}</td>
-					</tr>
-					{% endfor %}
+						</tr>
+							</thead>
+									<tbody>
+										<br>
+										
+									{% if ingresos %}
+										{% for elemento in ingresos %}
+										<tr>
+											<td>{{elemento.mayor.nombre_cuenta}}</td>
+											<td>$ {{elemento.saldo}}</td>
+										</tr>
+										{% endfor %}
+											
+									{% else %}
+									No hay cuentas registradas
+									{% endif %}
+					
+									{% if gastos %}
+										{% for elemento in gastos %}
+										<tr>
+											<td>{{elemento.mayor.nombre_cuenta}}</td>
+											<td></td>
+											<td>$ {{elemento.saldo}}</td>
+										</tr>
+										{% endfor %}
+						
+									{% else %}
+									No hay cuentas registradas
+									{% endif %}
+									<br>
+									<td><strong>TOTAL</strong></td>
+									<td><strong>$ {{monto_ingresos}}</strong></td>
+									<td><strong>$ {{monto_gastos}}</strong></td>
+									
+									
+					
+									<p style="position: absolute; top: 105%; left: 3%;"><strong>UTILIDAD <p style="position: absolute; left: 47%; top: 105%; font-size: 18px;">${{utilidad}}</p></strong></p>
+									
+									</tbody>		
+		</table>
+		</div>
+		</div>
+		
+		
+		<br><br>
+		<br><br>
 	
-				{% else %}
-				No hay cuentas registradas
-				{% endif %}
-				<br>
-				<td></td>
-				<td><strong>$ {{monto_ingresos}}</strong></td>
-				<td><strong>$ {{monto_gastos}}</strong></td>
+	
+</div>
+</div>
 
-
-				<tr>
-
-					<td><strong>UTILIDAD</strong></td>
-					<td><strong>$ {{utilidad}}</strong></td>
-				</tr>
-				
-				</tbody>	 
-
-				
-							
-</table>
 {% endblock %}

@@ -23,10 +23,10 @@ class asientoContableForm(forms.ModelForm):
 		}
 
 		widgets={
-		'cuenta_debe':forms.Select(attrs={'class':'form-control'}),
-		'importeDebe':forms.NumberInput(attrs={'class':'form-control'}),
-		'cuenta_haber':forms.Select(attrs={'class':'form-control'}),
-		'importeHaber':forms.NumberInput(attrs={'class':'form-control'}),
+		'cuenta_debe':forms.Select(attrs={'class':'form-control','required':'required'}),
+		'importeDebe':forms.NumberInput(attrs={'class':'form-control','required':'required', 'placeholder':'Monto de la cuenta debe'}),
+		'cuenta_haber':forms.Select(attrs={'class':'form-control','required':'required'}),
+		'importeHaber':forms.NumberInput(attrs={'class':'form-control','required':'required', 'placeholder':'Monto de la cuenta haber'}),
 		}
 class cuentaForm(forms.ModelForm):
 	class Meta:
@@ -49,10 +49,10 @@ class cuentaForm(forms.ModelForm):
 		}
 
 		widgets={
-		'codigo':forms.TextInput(attrs={'class':'form-control'}),
-		'nombre':forms.TextInput(attrs={'class':'form-control'}),
-		'tipo_cuenta':forms.Select(attrs={'class':'form-control'}),
-		'subcuenta':forms.TextInput(attrs={'class':'form-control'}),
+		'codigo':forms.TextInput(attrs={'class':'form-control','required':'required', 'placeholder':'Código de la cuenta'}),
+		'nombre':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\s]{1,50}','required':'required', 'placeholder':'Nombre de la cuenta'}),
+		'tipo_cuenta':forms.Select(attrs={'class':'form-control','required':'required'}),
+		'subcuenta':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\'\s]{1,50}','required':'required', 'placeholder':'Nombre de la subcuenta'}),
 		}
 
 class tipoCuentaForm(forms.ModelForm):
@@ -88,6 +88,6 @@ class libroDiarioForm(forms.ModelForm):
 		}
 
 		widgets={
-		'fecha':forms.TextInput(attrs={'class':'form-control','type':'date'}),
-		'concepto':forms.TextInput(attrs={'class':'form-control', 'type':'textarea'}),
+		'fecha':forms.TextInput(attrs={'class':'form-control','type':'date','required':'required'}),
+		'concepto':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\s]{1,50}','required':'required', 'placeholder':'Nombre de la cuenta', 'type':'textarea'}),
 		}
