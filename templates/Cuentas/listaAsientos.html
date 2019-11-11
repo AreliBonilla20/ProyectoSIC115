@@ -42,7 +42,7 @@ Libro Diario
 				{% if lista %}
 					{% for asiento in lista %}
 					<tr>
-						<td>{{asiento.id}}</td>
+						<td>{{asiento.numero_asiento}}</td>
 						<td>{{asiento.libroD.fecha}}</td>
 						<td>{{asiento.libroD.concepto}}</td>
 						<td>{{asiento.cuenta_debe}}</td>
