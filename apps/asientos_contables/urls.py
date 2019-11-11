@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^estadoResultados/$',resultados,name='estado_Resultados'),
     url(r'^estadoFlujoCapital/$',flujocapital,name='estado_flujo_capital'),
     url(r'^balanceGeneral/$',balanceGeneral,name='balance_general'),
+    url(r'^balanceComprobacion/$',balanceComprobacion,name='balance_comprobacion'),
 ]

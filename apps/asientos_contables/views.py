@@ -175,4 +175,16 @@ def balanceGeneral(request):
     montoPasivosPatrimonioUtilidad =montoPasivos + montoPatrimonio + montoUtilidad
 
     return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad})
+
+def balanceComprobacion(request):
+    cuentasComprobacion = elementoMayor.objects.all()
+    monto_debe = 0
+    monto_haber = 0
+    for i in cuentasComprobacion:
+        if i.monto > 0:
+            monto_debe+=i.monto
+        else:
+            monto_haber+=i.monto
+    return render(request,'Cuentas/balanceComprobacion.html',{'cuentasComprobacion':cuentasComprobacion, 'monto_haber':monto_haber, 'monto_debe':monto_debe})
+
     

@@ -1,0 +1,74 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Mayor
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Estado de resultados{% endblock %}</title>
+<a href=""><img  style='position: absolute; right: 5%; top: 120%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+<div class="container">
+<div class="form-title">
+	<div class="panel panel-default">
+			<div class="panel-body" style="text-align: center; background: #fbfbfb;">
+			  <h4><strong>Balance de comprobación</strong></h4>
+					  
+			</div>
+	</div>
+</div>
+
+<div class="container" style="position: absolute; left: 14%;">
+		<div class="row">
+		<div class="col-md-9">
+		<br><br><br><br>
+		
+		<h3><strong>González Orellana S.A</strong></h3>
+		<h5><strong>BALANCE DE COMPROBACIÓN</strong></h5>
+		<h5><strong>Del 1 al 30 de noviembre</strong></h5>
+		<table class="table table-bo"> 
+            <thead class="thead-light">
+            <tr>		
+            <th scope="col"><h4><strong>Cuenta</strong></h4></th>
+            <th scope="col"><h4><strong>Debe</strong></h4></th>
+            <th scope="col"><h4><strong>Haber</strong></h4></th>
+            
+            </tr>
+                </thead>
+                        <tbody>
+                        {% if cuentasComprobacion %}
+                            {% for i in cuentasComprobacion %}
+                            <tr>
+                                <td>{{i.mayor}}</td>
+                                {% if i.monto >= 0 %}
+                                <td>$ {{i.monto|stringformat:".3f"}}</td>
+                                <td></td>
+                                {% elif i.monto <= 0 %}
+                                <td></td>
+                                <td>$ {{i.monto|stringformat:".3f"|slice:"1:"}}</td>
+                                {% endif %}	
+                            </tr>
+                            
+                            {% endfor %}
+                            <td><strong>Total</strong></td>
+                            <td><strong>$ {{monto_debe|stringformat:".3f"}}</strong></td>
+                            <td><strong>$ {{monto_haber|stringformat:".3f"|slice:"1:"}}</strong></td>
+                            {% else %}
+                            No hay transacciones efectuadas
+                        {% endif %}
+        
+                        </tbody>	 
+                                    
+        </table>
+		</div>
+		</div>
+		
+		
+		<br><br>
+		<br><br>
+	
+	
+</div>
+</div>
+
+{% endblock %}

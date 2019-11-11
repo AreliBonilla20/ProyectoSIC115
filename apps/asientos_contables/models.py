@@ -54,6 +54,12 @@ class elementoMayor(models.Model):
             return(self.debe-self.haber)
     saldo = property(_get_saldo)
     
+    def _get_montofinal(self):
+        
+        return(self.debe-self.haber)
+        
+    monto = property(_get_montofinal)
+    
 class libroMayores(models.Model):
     mayor=models.ForeignKey(libroMayor,null=False,blank=False,on_delete=models.CASCADE)
 
