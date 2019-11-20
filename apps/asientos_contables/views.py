@@ -39,6 +39,16 @@ def catalogoCuentas(request):
     listaGast = cuenta.objects.filter(tipo_cuenta=5)
     return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr,'listaIng':listaIng,'listaGast':listaGast})
 
+class periodoContableCreate(CreateView):
+    model = periodoContable
+    template_name = 'Cuentas/periodoContable.html' 
+    form_class = periodoContableForm
+    success_url = reverse_lazy('asiento:catalogo_cuentas')
+
+class listarPeriodoContable(ListView):
+    model=periodoContable
+    template_name='Cuentas/listaPeriodoContable.html'
+
 def listaTransacciones(request):
     lista = asientoContable.objects.all()
     return render(request, 'Cuentas/listaAsientos.html',{'lista':lista})
@@ -93,6 +103,9 @@ class listarElementosMayor(ListView):
 def cerrarPeriodoContable(request):
   cuentas=cuenta.objects.all()
   asientos=asientoContable.objects.all()
+  periodo = periodoContable.objects.get(estado='Abierto')
+  periodo.estado = 'Cerrado'
+  periodo.save()
   if cuentas:
     for c in cuentas:
       cuenta_id=c.id

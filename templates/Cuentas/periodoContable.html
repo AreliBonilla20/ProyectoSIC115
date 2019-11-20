@@ -1,0 +1,48 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Nueva cuenta
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Período contable{% endblock %}</title>
+
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+					<div class="panel panel-default">
+							<div class="panel-body" style="text-align: center; background: #fbfbfb; font-family:Arial, Helvetica, sans-serif;">
+							  <h4><strong>Abrir período contable</strong></h4>
+									  
+							</div>
+					</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="col-md-7">
+			<div class="form-body">
+				<br><br>
+			<form class="form-horizontal" method="POST" action="{% url 'asiento:crear_periodo_contable' %}"> 
+					<div class="form-group">
+					{%csrf_token %}
+					 {{form.as_p}}
+					 <br><br> 
+					 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold; border-radius: 0%; background: #184365;"
+					 onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Guardar</button>
+					</div>
+
+					
+			</form> 
+			
+			</div>
+			</div>
+			
+			<img  style='position: absolute; right: 17.5%; top: 40%;' src="{% static 'images/agregar.png' %}" width="75px" height="75px">
+		
+			</div>
+			
+		
+</div>
+{% endblock %}
+

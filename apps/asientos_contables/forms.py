@@ -2,6 +2,33 @@ from django import forms
 from django.forms.models import modelformset_factory,inlineformset_factory
 from apps.asientos_contables.models import *
 
+class periodoContableForm(forms.ModelForm):
+	class Meta:
+		model = periodoContable
+		OPCIONES = (
+    		('Abierto','Abierto'),
+    		('Cerrado','Cerrado'),
+		)
+
+		fields=[
+		'fechaInicio',
+		'fechaFinal',
+		
+		]
+
+		labels={
+		'fechaInicio':'Fecha de inicio del período',
+		'fechaFinal':'Fecha final del período',
+		
+		}
+
+		widgets={
+		'fechaInicio':forms.TextInput(attrs={'class':'form-control','type':'date','required':'required'}),
+		'fechaFinal':forms.TextInput(attrs={'class':'form-control','type':'date','required':'required'}),
+		
+		
+		}
+
 class asientoContableForm(forms.ModelForm):
 	class Meta:
 		model = asientoContable

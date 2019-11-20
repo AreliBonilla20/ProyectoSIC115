@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^estadoFlujoCapital/$',flujocapital,name='estado_flujo_capital'),
     url(r'^balanceGeneral/$',balanceGeneral,name='balance_general'),
     url(r'^balanceComprobacion/$',balanceComprobacion,name='balance_comprobacion'),
+    url(r'^crearPeriodoContable/$',periodoContableCreate.as_view(),name='crear_periodo_contable'),
+    url(r'^listarPeriodoContable/$',listarPeriodoContable.as_view(),name='lista_periodo_contable'),
 ]

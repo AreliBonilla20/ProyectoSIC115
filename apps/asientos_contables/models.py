@@ -1,6 +1,11 @@
 from django.db import models
 from apps.asientos_contables.models import *
 
+class periodoContable(models.Model):
+    fechaInicio=models.DateField()
+    fechaFinal=models.DateField()
+    estado=models.CharField(default="Abierto",max_length=25)
+
 class tipoCuenta(models.Model):
     tipo=models.CharField(max_length=50)
 
