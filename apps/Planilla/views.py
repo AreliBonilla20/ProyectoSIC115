@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic import View
 from .models import Salario,Empleado,Cargo,Contrato
-
+import datetime
 # Create your views here.
+
+
 
 class RegistroView(View):
     def get(self, request, *args, **kwargs):
@@ -41,8 +43,27 @@ class RegistroView(View):
         empleado.save()
         cargo.save()
         salario.save()
-
+        print('ok')
+        contrato = Contrato.objects.create(empleado=empleado,salario=salario,cargo=cargo,fechaContratacion=datetime.date.today())
+        contrato.save()
         return render(request,'planilla/registro_empleado.html',context={})
+
+
+class TablaPlanillaView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        lista = list(Contrato.objects.all().order_by('empleado__apellidos'))
+        total_salario = sum
+        context.update({'lista':lista})
+        return render(request,'planilla/tabla_sueldos.html',context)
+
+    def post(self, request, *args, **kwargs):
+        context={}
+        anyo,mes = request.POST['mes'].split('-')
+        lista = Contrato.objects.filter(fechaContratacion__lte=datetime.date(int(anyo),int(mes),1)).order_by('empleado__apellidos')
+        print(lista)
+        context.update({'lista':list(lista)})
+        return render(request,'planilla/tabla_sueldos.html',context)
 
 
 def calculo_renta(monto):
@@ -72,4 +93,3 @@ def calculo_isss(monto):
 def calculo_afp(monto):
     afp = monto * 0.0750
     return afp
-
