@@ -3,6 +3,8 @@ from django.views.generic import CreateView
 from django.views.generic import View
 from .models import Salario,Empleado,Cargo,Contrato
 import datetime
+from django.db.models import Sum
+
 # Create your views here.
 
 
@@ -53,15 +55,30 @@ class TablaPlanillaView(View):
     def get(self, request, *args, **kwargs):
         context = {}
         lista = list(Contrato.objects.all().order_by('empleado__apellidos'))
+        total_salarios = Contrato.objects.all().order_by('empleado__apellidos').aggregate(Sum('salario__sueldoNeto'))
+        total_afp = Contrato.objects.all().order_by('empleado__apellidos').aggregate(Sum('salario__porcAFP'))
+        total_isss = Contrato.objects.all().order_by('empleado__apellidos').aggregate(Sum('salario__porcISSS'))
+        total_renta = Contrato.objects.all().order_by('empleado__apellidos').aggregate(Sum('salario__renta'))
         context.update({'lista':lista})
+        context.update(total_salarios)
+        context.update(total_afp)
+        context.update(total_isss)
+        context.update(total_renta)
         return render(request,'planilla/tabla_sueldos.html',context)
 
     def post(self, request, *args, **kwargs):
         context={}
         anyo,mes = request.POST['mes'].split('-')
         lista = Contrato.objects.filter(fechaContratacion__lte=datetime.date(int(anyo),int(mes),1)).order_by('empleado__apellidos')
-        print(lista)
+        total_salarios = lista.aggregate(Sum('salario__sueldoNeto'))
         context.update({'lista':list(lista)})
+        total_afp = lista.aggregate(Sum('salario__porcAFP'))
+        total_isss = lista.aggregate(Sum('salario__porcISSS'))
+        total_renta = lista.aggregate(Sum('salario__renta'))
+        context.update(total_salarios)
+        context.update(total_afp)
+        context.update(total_isss)
+        context.update(total_renta)
         return render(request,'planilla/tabla_sueldos.html',context)
 
 
