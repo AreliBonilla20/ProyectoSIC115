@@ -31,38 +31,44 @@ def listaGastos(request):
     listaGast = cuenta.objects.filter(tipo_cuenta=5)
     return render(request,'Cuentas/listaGastos.html',{'listaGast':listaGast})
 
-def catalogoCuentas(request):
-    listaAct = cuenta.objects.filter(tipo_cuenta=1)
-    listaPas = cuenta.objects.filter(tipo_cuenta=2)
-    listaPatr = cuenta.objects.filter(tipo_cuenta=3)
-    listaIng = cuenta.objects.filter(tipo_cuenta=4)
-    listaGast = cuenta.objects.filter(tipo_cuenta=5)
-    return render(request,'Cuentas/catalogoCuentas.html',{'listaAct':listaAct,'listaPas':listaPas,'listaPatr':listaPatr,'listaIng':listaIng,'listaGast':listaGast})
+def crearPeriodoContable(request):
+    periodos = periodoContable.objects.filter(estado="Abierto")
+    mensaje = ""
+    
+    if periodos:
+        mensaje = "No se puede abrir un período, ya que hay un ciclo contable en curso"
+        return render(request,'Cuentas/periodoContable.html',{'mensaje':mensaje})
 
-class periodoContableCreate(CreateView):
-    model = periodoContable
-    template_name = 'Cuentas/periodoContable.html' 
-    form_class = periodoContableForm
-    success_url = reverse_lazy('asiento:catalogo_cuentas')
+    else:
+        if request.method == 'POST':
+            form = periodoContableForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('asiento:lista_periodo_contable')
+        else:
+            form = periodoContableForm()
+
+        return render(request,'Cuentas/periodoContable.html',{'form':form})
+    
 
 class listarPeriodoContable(ListView):
     model=periodoContable
     template_name='Cuentas/listaPeriodoContable.html'
 
 def listaTransacciones(request):
-    lista = asientoContable.objects.all()
+    lista = asientoContable.objects.filter(periodo__isnull=True)
     return render(request, 'Cuentas/listaAsientos.html',{'lista':lista})
 
 class cuentaCreate(CreateView):
     model = cuenta
     template_name = 'Cuentas/cuentaCrear.html' 
     form_class = cuentaForm
-    success_url = reverse_lazy('asiento:catalogo_cuentas')
+    success_url = reverse_lazy('asiento:catalogo_activos')
 
 
-class listarLibroDiario(ListView):
-    model=asientoContable
-    template_name='Cuentas/libroDiario.html'
+def listarLibroDiario(request):
+    libroDiario = asientoContable.objects.filter(periodo__isnull=True)
+    return render(request, 'Cuentas/libroDiario.html',{'libroDiario':libroDiario})
 
 
 class asientoContableCrear(CreateView):
@@ -70,7 +76,7 @@ class asientoContableCrear(CreateView):
     template_name = 'Cuentas/asientoContableCrear.html' 
     form_class = asientoContableForm
     second_form_class = libroDiarioForm
-    success_url = reverse_lazy('asiento:libroDiario')
+    success_url = reverse_lazy('asiento:lista_transacciones')
 
     def get_context_data(self,**kwargs):
         context = super(asientoContableCrear,self).get_context_data(**kwargs)
@@ -103,9 +109,13 @@ class listarElementosMayor(ListView):
 def cerrarPeriodoContable(request):
   cuentas=cuenta.objects.all()
   asientos=asientoContable.objects.all()
-  periodo = periodoContable.objects.get(estado='Abierto')
-  periodo.estado = 'Cerrado'
-  periodo.save()
+  periodoCont = periodoContable.objects.get(estado='Abierto')
+  transacciones = asientoContable.objects.filter(periodo__isnull=True)
+  
+  for i in transacciones:
+      i.periodo = periodoCont
+      i.save()
+
   if cuentas:
     for c in cuentas:
       cuenta_id=c.id
@@ -130,12 +140,38 @@ def cerrarPeriodoContable(request):
         elemento.debe=totalDebe
         elemento.haber=totalHaber
         elemento.mayor=libro
+        elemento.periodoCont = periodoCont
         elemento.save()
-  return redirect('asiento:listarLibroMayor')
+    
+    periodoCont.estado = 'Cerrado'
+    periodoCont.save()
 
-def resultados(request):
-    ingresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4)
-    gastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5)
+    return redirect('asiento:listarLibroMayor')
+
+def transaccionesPeriodo(request,id_periodoContable):
+    asientos = asientoContable.objects.filter(periodo=id_periodoContable)
+    
+    return render(request,'Cuentas/transaccionesPeriodoContable.html',{'asientos':asientos})
+
+def libroMayorPeriodo(request,id_periodoContable):
+    elemento = elementoMayor.objects.filter(periodoCont=id_periodoContable)
+    return render(request,'Cuentas/libroMayorPeriodoContable.html',{'elemento':elemento})
+
+
+def balanceComprobacion(request,id_periodoContable):
+    cuentasComprobacion = elementoMayor.objects.filter(periodoCont=id_periodoContable)
+    monto_debe = 0
+    monto_haber = 0
+    for i in cuentasComprobacion:
+        if i.monto > 0:
+            monto_debe+=i.monto
+        else:
+            monto_haber+=i.monto
+    return render(request,'Cuentas/balanceComprobacion.html',{'cuentasComprobacion':cuentasComprobacion, 'monto_haber':monto_haber, 'monto_debe':monto_debe, 'id_periodoContable':id_periodoContable})
+
+def resultados(request,id_periodoContable):
+    ingresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4, periodoCont=id_periodoContable)
+    gastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5, periodoCont=id_periodoContable)
     monto_ingresos=0
     monto_gastos=0
     utilidad=0
@@ -144,23 +180,23 @@ def resultados(request):
     for i in gastos:
         monto_gastos += i.saldo
     utilidad=monto_ingresos-monto_gastos
-    return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad})
+    return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad,'id_periodoContable':id_periodoContable})
 
-def flujocapital(request):
-    listaFlujoCapital = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3)
+def flujocapital(request,id_periodoContable):
+    listaFlujoCapital = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3, periodoCont=id_periodoContable)
     montoFlujoCapital = 0
     for l in listaFlujoCapital:
         montoFlujoCapital+=l.saldo
     
-    return render(request,'Cuentas/estadoFlujoCapital.html',{'listaFlujoCapital':listaFlujoCapital,'montoFlujoCapital':montoFlujoCapital})
+    return render(request,'Cuentas/estadoFlujoCapital.html',{'listaFlujoCapital':listaFlujoCapital,'montoFlujoCapital':montoFlujoCapital,'id_periodoContable':id_periodoContable})
 
 
-def balanceGeneral(request):
-    listaActivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=1)
-    listaPasivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=2)
-    listaPatrimonio = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3)
-    listaIngresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4)
-    listaGastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5)
+def balanceGeneral(request,id_periodoContable):
+    listaActivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=1, periodoCont=id_periodoContable)
+    listaPasivos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=2, periodoCont=id_periodoContable)
+    listaPatrimonio = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3, periodoCont=id_periodoContable)
+    listaIngresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4, periodoCont=id_periodoContable)
+    listaGastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5, periodoCont=id_periodoContable)
     montoActivos = 0
     montoPasivos = 0
     montoPatrimonio = 0
@@ -187,17 +223,8 @@ def balanceGeneral(request):
     montoUtilidad = montoIngresos-montoGastos
     montoPasivosPatrimonioUtilidad =montoPasivos + montoPatrimonio + montoUtilidad
 
-    return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad})
+    return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad,'id_periodoContable':id_periodoContable})
 
-def balanceComprobacion(request):
-    cuentasComprobacion = elementoMayor.objects.all()
-    monto_debe = 0
-    monto_haber = 0
-    for i in cuentasComprobacion:
-        if i.monto > 0:
-            monto_debe+=i.monto
-        else:
-            monto_haber+=i.monto
-    return render(request,'Cuentas/balanceComprobacion.html',{'cuentasComprobacion':cuentasComprobacion, 'monto_haber':monto_haber, 'monto_debe':monto_debe})
+
 
     

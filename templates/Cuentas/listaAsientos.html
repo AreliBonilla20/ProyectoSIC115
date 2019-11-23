@@ -6,7 +6,7 @@ Libro Diario
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Asientos contables realizados{% endblock %}</title>
+<title>{% block Title %}Asientos contables{% endblock %}</title>
 
 <a href="{% url 'asiento:nuevo_asientoContable' %}" type="submit" style="position: absolute; right: 3%; top: 30%;"> <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
 	onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Agregar nuevo asiento contable</button></a>
@@ -15,7 +15,7 @@ Libro Diario
 		<div class="form-title">
 			<div class="panel panel-default">
 					<div class="panel-body" style="text-align: center; background: #fbfbfb;">
-					  <h4><strong>Asientos contables registrados</strong></h4>
+					  <h4><strong>Asientos contables registrados realizados en el período en curso</strong></h4>
 							  
 					</div>
 			</div>
@@ -28,7 +28,7 @@ Libro Diario
 <table class="table table-hover"> 
 	<thead class="thead-light">
 	<tr>
-	<th scope="col"><h4><strong>N° asiento</strong></h4></th>		
+	<th scope="col"><h4><strong>N° asiento</strong></h4></th>
 	<th scope="col"><h4><strong>Fecha</strong></h4></th>
 	<th scope="col"><h4><strong>Concepto</strong></h4></th>
 	<th scope="col"><h4><strong>Cuenta debe</strong></h4></th>

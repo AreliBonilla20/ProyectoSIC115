@@ -19,17 +19,27 @@ Nueva cuenta
 					</div>
 			</div>
 
-			<div class="container-fluid">
+			<div class="container">
 				<div class="col-md-7">
 			<div class="form-body">
 				<br><br>
 			<form class="form-horizontal" method="POST" action="{% url 'asiento:crear_periodo_contable' %}"> 
 					<div class="form-group">
 					{%csrf_token %}
+					 {% if form %}
+					 
 					 {{form.as_p}}
-					 <br><br> 
+				     <br><br>
 					 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="font-weight: bold; border-radius: 0%; background: #184365;"
 					 onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Guardar</button>
+					 <br><br> 
+					 {% endif %}
+
+					 {% if mensaje %}
+					 <h3>{{mensaje}}</h3>
+					 {% endif %}
+
+					 
 					</div>
 
 					
@@ -38,7 +48,7 @@ Nueva cuenta
 			</div>
 			</div>
 			
-			<img  style='position: absolute; right: 17.5%; top: 40%;' src="{% static 'images/agregar.png' %}" width="75px" height="75px">
+		
 		
 			</div>
 			

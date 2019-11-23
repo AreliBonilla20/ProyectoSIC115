@@ -5,10 +5,7 @@ from apps.asientos_contables.models import *
 class periodoContableForm(forms.ModelForm):
 	class Meta:
 		model = periodoContable
-		OPCIONES = (
-    		('Abierto','Abierto'),
-    		('Cerrado','Cerrado'),
-		)
+	
 
 		fields=[
 		'fechaInicio',
@@ -52,7 +49,7 @@ class asientoContableForm(forms.ModelForm):
 		}
 
 		widgets={
-		'numero_asiento':forms.NumberInput(attrs={'class':'form-control'}),
+		'numero_asiento':forms.NumberInput(attrs={'class':'form-control','required':'required'}),
 		'cuenta_debe':forms.Select(attrs={'class':'form-control','required':'required'}),
 		'importeDebe':forms.NumberInput(attrs={'class':'form-control','required':'required', 'placeholder':'Monto de la cuenta debe'}),
 		'cuenta_haber':forms.Select(attrs={'class':'form-control','required':'required'}),

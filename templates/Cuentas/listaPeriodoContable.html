@@ -46,6 +46,27 @@ Libro Diario
 						<td>{{l.fechaInicio}}</td>
 						<td>{{l.fechaFinal}}</td>
 						<td>{{l.estado}}</td>
+						<td>
+							<a class="btn btn-outline-success" href="{% url 'asiento:transacciones_periodo' l.id %} ">
+								<button type = "button" class = "btn btn-default" 
+								style="font-weight: bold; border-radius: 0%; background: #3b6e96; color:white;"
+								onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>
+								Transacciones</button>
+							</a>
+							<a class="btn btn-outline-success" href="{% url 'asiento:libro_mayor_periodo' l.id %} ">
+									<button type = "button" class = "btn btn-default" 
+									style="font-weight: bold; border-radius: 0%; background: #3b6e96; color:white;"
+									onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>
+									Libro mayor</button>
+								</a>
+								<a class="btn btn-outline-success" href="{% url 'asiento:balance_comprobacion' l.id %} ">
+										<button type = "button" class = "btn btn-default" 
+										style="font-weight: bold; border-radius: 0%; background: #3b6e96; color:white;"
+										onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>
+										Estados financieros</button>
+								</a>
+					
+						</td>
 					
 					</tr>
 					{% endfor %}

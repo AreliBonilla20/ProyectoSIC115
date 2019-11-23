@@ -35,6 +35,8 @@ class asientoContable(models.Model):
     importeDebe=models.DecimalField(max_digits=8,decimal_places=2)
     cuenta_haber=models.ForeignKey(cuenta,null=False,blank=False,on_delete=models.CASCADE,related_name='cuenta_haber')
     importeHaber=models.DecimalField(max_digits=8,decimal_places=2)
+    periodo = models.ForeignKey(periodoContable,null=True,blank=True,on_delete=models.CASCADE)
+
     
     def __str__(self):
         return '{}'.format(self.cuenta_debe.nombre+"-"+self.cuenta_haber.nombre)
@@ -49,6 +51,7 @@ class elementoMayor(models.Model):
     debe=models.DecimalField(max_digits=8,decimal_places=3)
     haber=models.DecimalField(max_digits=8,decimal_places=3)
     mayor=models.ForeignKey(libroMayor,null=False,blank=False,on_delete=models.CASCADE)
+    periodoCont = models.ForeignKey(periodoContable,null=True,blank=True,on_delete=models.CASCADE)
 
     def _get_saldo(self):
         if self.debe>self.haber:
