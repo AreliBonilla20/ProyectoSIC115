@@ -53,7 +53,6 @@ class TablaPlanillaView(View):
     def get(self, request, *args, **kwargs):
         context = {}
         lista = list(Contrato.objects.all().order_by('empleado__apellidos'))
-        total_salario = sum
         context.update({'lista':lista})
         return render(request,'planilla/tabla_sueldos.html',context)
 

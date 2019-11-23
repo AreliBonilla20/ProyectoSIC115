@@ -1,5 +1,66 @@
 {% extends "base/base1.html" %}
 
 {% block content %}
-    
+<p>{{lista}}</p>
+<div class="row">
+    <div class="col-xs-3">
+        
+    </div>
+    <div class="col-xs-6">
+            <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="mes">Planilla</label>
+                      <input type="month" name="mes" id="mes" class="form-control" placeholder="" required>
+                      <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>                    
+            </form>
+    </div>
+    <div class="col-xs-3">
+        
+    </div>
+</div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Aellidos</th>
+                <th>Nombres</th>
+                <th>NUP</th>
+                <th>ISSS</th>
+                <th>Fecha Contratacion</th>
+                <th>Nombre de Cargo</th>
+                <th>Sueldo Bruto</th>
+                <th>Retencion de Renta</th>
+                <th>Retencion de ISSS</th>
+                <th>Retencion de AFP</th>
+                <th>Otras Retenciones/Descuentos</th>
+                <th>Sueldo Neto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for elemento in lista %}
+
+                <tr>
+                    <td>{{elemento.empleado.pk}}</td>
+                    <td>{{elemento.empleado.apellidos}}</td>
+                    <td>{{elemento.empleado.nombres}}</td>
+                    <td>{{elemento.empleado.nup}}</td>
+                    <td>{{elemento.empleado.isss}}</td>
+                    <td>{{elemento.fechaContratacion}}</td>
+                    <td>{{elemento.cargo.nombreCargo}}</td>
+                    <td>{{elemento.salario.haberBase}}</td>
+                    <td>{{elemento.salario.renta}}</td>
+                    <td>{{elemento.salario.porcISSS}}</td>
+                    <td>{{elemento.salario.porcAFP}}</td>
+                    <td>{{elemento.salario.otrosDescuentos}}</td>
+                    <td>{{elemento.salario.sueldoNeto}}</td>
+                </tr>
+            {% endfor %}
+            
+           
+        </tbody>
+    </table>
 {% endblock content %}

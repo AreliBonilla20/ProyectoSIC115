@@ -19,11 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from apps.asientos_contables.views import index,indexAdmin
 from django.contrib.auth.views import login, logout_then_login, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
-from apps.Planilla.views import RegistroView
+from apps.Planilla.views import RegistroView,TablaPlanillaView
 urlpatterns = [
 	url(r'^admin/',admin.site.urls),
 	url(r'^indexAdmin/',indexAdmin,name="indexAdmin"),  
     url(r'^asiento/', include('apps.asientos_contables.urls',namespace="asiento")), 
     url(r'^$', login, {'template_name':'Cuentas/login.html'}, name='login'),
     url(r'^registro/$', RegistroView.as_view(), name='registro'),
+    url(r'^tabla/$', TablaPlanillaView.as_view(), name='tabla'),
 ] + static (settings.STATIC_URL , document_root = settings.STATIC_ROOT)

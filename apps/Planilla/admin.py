@@ -9,10 +9,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
 admin.site.register(Empleado, EmpleadoAdmin)
 
 class SalarioAdmin(admin.ModelAdmin):
-    list_display = ('haberBase','bonoAntig','bonoProduccion',
-                    'otrosBonos',
-                    'horasExtra','montoHorasExtra',
-                    'sueldoBruto',
+    list_display = ('haberBase','bonoAntig','sueldoBruto',
                     'porcISSS','porcAFP','otrosDescuentos',
                     'sueldoNeto')
 
@@ -23,7 +20,10 @@ class CargoAdmin(admin.ModelAdmin):
 
 admin.site.register(Cargo, CargoAdmin)
 
+
 class ContratoAdmin(admin.ModelAdmin):
     list_display = ('pk','empleado','salario','cargo','fechaContratacion')
+    list_filter = ('fechaContratacion',)
 
 admin.site.register(Contrato, ContratoAdmin)
+

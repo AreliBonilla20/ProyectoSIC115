@@ -52,10 +52,6 @@ class Salario(models.Model):
     porcISSS = models.DecimalField('Porcentaje descuento ISSS', max_digits=8, decimal_places=2,blank=True, null=True)
     porcAFP = models.DecimalField('Porcentaje descuento AFP', max_digits=8, decimal_places=2,blank=True, null=True)
     bonoAntig = models.DecimalField('Bono de Antiguedad', max_digits=8, decimal_places=2,blank=True, null=True)
-    horasExtra = models.IntegerField(("Nº Horas Extra"),blank=True, null=True)
-    montoHorasExtra = models.DecimalField(("Monto por Horas Extra"), max_digits=8, decimal_places=2,blank=True, null=True)
-    bonoProduccion = models.DecimalField(("Bono por Produccion"), max_digits=8, decimal_places=2,blank=True, null=True)
-    otrosBonos = models.DecimalField(("Otros Bonos"), max_digits=8, decimal_places=2,blank=True, null=True)
     renta = models.DecimalField(("Retencio de renta"), max_digits=8, decimal_places=2,blank=True, null=True)  
     sueldoNeto = models.DecimalField(("Sueldo Neto"), max_digits=8, decimal_places=2,blank=True, null=True) #Total Ganado, Liquido 
     sueldoBruto = models.DecimalField(("Sueldo Bruto"), max_digits=8, decimal_places=2,blank=True, null=True)
