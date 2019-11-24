@@ -40,6 +40,10 @@ def mensajeGuardadoAsiento(request):
 def mensajeGuardadoPeriodo(request):
     return render(request,'Cuentas/mensajeGuardadoPeriodo.html')
 
+def confirmarCerrarPeriodo(request):
+    periodos = periodoContable.objects.filter(estado="Abierto")
+    return render(request,'Cuentas/confirmacionCerrarPeriodo.html', {'periodos':periodos})
+
 def crearPeriodoContable(request):
     periodos = periodoContable.objects.filter(estado="Abierto")
     mensaje = ""

@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^cuentaRegistrada/$',login_required(mensajeGuardadoCuenta),name='cuenta_registrada'),
     url(r'^asientoRegistrado/$',login_required(mensajeGuardadoAsiento),name='asiento_registrado'),
     url(r'^periodoRegistrado/$',login_required(mensajeGuardadoPeriodo),name='periodo_registrado'),
+    url(r'^confirmacionCerrarPeriodo/$',login_required(confirmarCerrarPeriodo),name='confirmacion_cerrar_periodo'),
     url(r'^catalogoActivos/$',login_required(listaActivos),name='catalogo_activos'),
     url(r'^catalogoPasivos/$',login_required(listaPasivos),name='catalogo_pasivos'),
     url(r'^catalogoPatrimonio/$',login_required(listaPatrimonio),name='catalogo_patrimonio'), 

@@ -55,6 +55,22 @@
                     </ul>
 
                   </li>
+
+                  <li class="dropdown">
+                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Período contable
+                      <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'asiento:crear_periodo_contable' %}">Abrir período de contabilidad</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'asiento:lista_periodo_contable' %}">Ver períodos</a></li>
+                      
+
+                    </ul>
+
+                  </li>
+                  
                   <li class="dropdown">
                     <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Asientos contables
                       <span class="caret"></span>
@@ -85,20 +101,7 @@
 
                  
               
-                  <li class="dropdown">
-                    <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Período contable
-                      <span class="caret"></span>
-                    </a>
-
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="{% url 'asiento:crear_periodo_contable' %}">Abrir período de contabilidad</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'asiento:lista_periodo_contable' %}">Ver períodos</a></li>
-                      
-
-                    </ul>
-
-                  </li>
+                 
 
                   <li class="dropdown">
                       <a  class="dropdown-toggle itemMenu" data-toggle="dropdown" role="button" href="#">Salarios
