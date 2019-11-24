@@ -31,6 +31,15 @@ def listaGastos(request):
     listaGast = cuenta.objects.filter(tipo_cuenta=5)
     return render(request,'Cuentas/listaGastos.html',{'listaGast':listaGast})
 
+def mensajeGuardadoCuenta(request):
+    return render(request,'Cuentas/mensajeGuardadoCuenta.html')
+
+def mensajeGuardadoAsiento(request):
+    return render(request,'Cuentas/mensajeGuardadoAsiento.html')
+
+def mensajeGuardadoPeriodo(request):
+    return render(request,'Cuentas/mensajeGuardadoPeriodo.html')
+
 def crearPeriodoContable(request):
     periodos = periodoContable.objects.filter(estado="Abierto")
     mensaje = ""
@@ -44,7 +53,7 @@ def crearPeriodoContable(request):
             form = periodoContableForm(request.POST)
             if form.is_valid():
                 form.save()
-            return redirect('asiento:lista_periodo_contable')
+            return redirect('asiento:periodo_registrado')
         else:
             form = periodoContableForm()
 
@@ -63,7 +72,7 @@ class cuentaCreate(CreateView):
     model = cuenta
     template_name = 'Cuentas/cuentaCrear.html' 
     form_class = cuentaForm
-    success_url = reverse_lazy('asiento:catalogo_activos')
+    success_url = reverse_lazy('asiento:cuenta_registrada')
 
 
 def listarLibroDiario(request):
@@ -76,7 +85,8 @@ class asientoContableCrear(CreateView):
     template_name = 'Cuentas/asientoContableCrear.html' 
     form_class = asientoContableForm
     second_form_class = libroDiarioForm
-    success_url = reverse_lazy('asiento:lista_transacciones')
+    success_url = reverse_lazy('asiento:asiento_registrado')
+    
 
     def get_context_data(self,**kwargs):
         context = super(asientoContableCrear,self).get_context_data(**kwargs)
@@ -101,6 +111,8 @@ class asientoContableCrear(CreateView):
 
         else:
             return self.render_to_response(self.get_context_data(form=form,form2=form2))
+            
+
 
 class listarElementosMayor(ListView):
     model=elementoMayor
@@ -160,6 +172,7 @@ def libroMayorPeriodo(request,id_periodoContable):
 
 def balanceComprobacion(request,id_periodoContable):
     cuentasComprobacion = elementoMayor.objects.filter(periodoCont=id_periodoContable)
+    periodo = periodoContable.objects.filter(id=id_periodoContable)
     monto_debe = 0
     monto_haber = 0
     for i in cuentasComprobacion:
@@ -167,11 +180,12 @@ def balanceComprobacion(request,id_periodoContable):
             monto_debe+=i.monto
         else:
             monto_haber+=i.monto
-    return render(request,'Cuentas/balanceComprobacion.html',{'cuentasComprobacion':cuentasComprobacion, 'monto_haber':monto_haber, 'monto_debe':monto_debe, 'id_periodoContable':id_periodoContable})
+    return render(request,'Cuentas/balanceComprobacion.html',{'cuentasComprobacion':cuentasComprobacion, 'monto_haber':monto_haber, 'monto_debe':monto_debe, 'id_periodoContable':id_periodoContable,'periodo':periodo})
 
 def resultados(request,id_periodoContable):
     ingresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4, periodoCont=id_periodoContable)
     gastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5, periodoCont=id_periodoContable)
+    periodo = periodoContable.objects.filter(id=id_periodoContable)
     monto_ingresos=0
     monto_gastos=0
     utilidad=0
@@ -180,15 +194,16 @@ def resultados(request,id_periodoContable):
     for i in gastos:
         monto_gastos += i.saldo
     utilidad=monto_ingresos-monto_gastos
-    return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad,'id_periodoContable':id_periodoContable})
+    return render(request,'Cuentas/estadoResultados.html',{'ingresos':ingresos,'gastos':gastos, 'monto_ingresos':monto_ingresos,'monto_gastos':monto_gastos,'utilidad':utilidad,'id_periodoContable':id_periodoContable,'periodo':periodo})
 
 def flujocapital(request,id_periodoContable):
     listaFlujoCapital = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3, periodoCont=id_periodoContable)
+    periodo = periodoContable.objects.filter(id=id_periodoContable)
     montoFlujoCapital = 0
     for l in listaFlujoCapital:
         montoFlujoCapital+=l.saldo
     
-    return render(request,'Cuentas/estadoFlujoCapital.html',{'listaFlujoCapital':listaFlujoCapital,'montoFlujoCapital':montoFlujoCapital,'id_periodoContable':id_periodoContable})
+    return render(request,'Cuentas/estadoFlujoCapital.html',{'listaFlujoCapital':listaFlujoCapital,'montoFlujoCapital':montoFlujoCapital,'id_periodoContable':id_periodoContable,'periodo':periodo})
 
 
 def balanceGeneral(request,id_periodoContable):
@@ -197,6 +212,7 @@ def balanceGeneral(request,id_periodoContable):
     listaPatrimonio = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=3, periodoCont=id_periodoContable)
     listaIngresos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=4, periodoCont=id_periodoContable)
     listaGastos = elementoMayor.objects.filter(mayor__nombre_cuenta__tipo_cuenta=5, periodoCont=id_periodoContable)
+    periodo = periodoContable.objects.filter(id=id_periodoContable)
     montoActivos = 0
     montoPasivos = 0
     montoPatrimonio = 0
@@ -223,7 +239,7 @@ def balanceGeneral(request,id_periodoContable):
     montoUtilidad = montoIngresos-montoGastos
     montoPasivosPatrimonioUtilidad =montoPasivos + montoPatrimonio + montoUtilidad
 
-    return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad,'id_periodoContable':id_periodoContable})
+    return render(request,'Cuentas/balanceGeneral.html',{'listaActivos':listaActivos,'listaPasivos':listaPasivos,'listaPatrimonio':listaPatrimonio,'montoActivos':montoActivos,'montoPasivos':montoPasivos,'montoPatrimonio':montoPatrimonio,'montoUtilidad':montoUtilidad, 'montoPasivosPatrimonioUtilidad':montoPasivosPatrimonioUtilidad,'id_periodoContable':id_periodoContable,'periodo':periodo})
 
 
 

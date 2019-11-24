@@ -14,7 +14,7 @@ class tipoCuenta(models.Model):
 
 class cuenta(models.Model):
     codigo=models.CharField(max_length=25)
-    subcuenta=models.CharField(max_length=50, null=True)
+    subcuenta=models.CharField(max_length=50, null=True,blank=True)
     nombre = models.CharField(max_length=50)
     tipo_cuenta=models.ForeignKey(tipoCuenta,null=False,blank=False,on_delete=models.CASCADE)
 

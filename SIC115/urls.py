@@ -25,5 +25,6 @@ urlpatterns = [
 	url(r'^indexAdmin/',indexAdmin,name="indexAdmin"),  
     url(r'^asiento/', include('apps.asientos_contables.urls',namespace="asiento")), 
     url(r'^accounts/login/', login, {'template_name':'Cuentas/login.html'}, name='login'),
+    url(r'^$', login, {'template_name':'Cuentas/login.html'}, name='login'),
     url(r'^logout/', logout_then_login, name='logout'),
 ] + static (settings.STATIC_URL , document_root = settings.STATIC_ROOT)

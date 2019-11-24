@@ -7,7 +7,7 @@ Libro Mayor
 
 {% block content %}
 <title>{% block Title %}Balance general{% endblock %}</title>
-<a href=""><img  style='position: absolute; right: 5%; top: 120%;' src="{% static 'images/pdf.png' %}" width="75px" height="75px"></a>
+<a style="padding-left:10%;" href="#" onclick="HTMLtoPDF()"><h3 style="padding-left:85%;">Generar reporte</h3></a>
 <div class="container">
 <div class="form-title">
 	<div class="panel panel-default">
@@ -27,12 +27,16 @@ Libro Mayor
         
 </ul>
 
-<div class="container" style="position: absolute; left: 5%;">
+<div id="HTMLtoPDF">
+<div class="container" style="position: absolute; left: 7%;">
 	<div class="col-md-11">
 				<br><br><br><br>
-				<h3><strong>González Orellana S.A</strong></h3>
-				<h5><strong>BALANCE GENERAL</strong></h5>
-				<h5><strong>Del 1 al 30 de noviembre</strong></h5>
+				<h3><strong>Kasandra Carolina de R.L</strong></h3>
+        		<h5><strong>BALANCE GENERAL</strong></h5>
+        		{% for i in periodo %}
+        		<h5><strong>Del {{i.fechaInicio}} al {{i.fechaFinal}}</strong></h5>
+        		{% endfor %}
+				
 				<br>
 <div class="col-md-6">
 <table class="table table-hover"> 
@@ -146,6 +150,7 @@ Libro Mayor
 
 <br><br><br><br>
 
+</div>
 </div>
 </div>
 </div>

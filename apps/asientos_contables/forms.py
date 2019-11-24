@@ -79,7 +79,7 @@ class cuentaForm(forms.ModelForm):
 		'codigo':forms.TextInput(attrs={'class':'form-control','required':'required', 'placeholder':'Código de la cuenta'}),
 		'nombre':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\s]{1,50}','required':'required', 'placeholder':'Nombre de la cuenta'}),
 		'tipo_cuenta':forms.Select(attrs={'class':'form-control','required':'required'}),
-		'subcuenta':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\'\s]{1,50}','required':'required', 'placeholder':'Nombre de la subcuenta'}),
+		'subcuenta':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\'\s]{1,50}', 'placeholder':'Nombre de la subcuenta'}),
 		}
 
 class tipoCuentaForm(forms.ModelForm):
