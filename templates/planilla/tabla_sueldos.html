@@ -1,7 +1,6 @@
 {% extends "base/base1.html" %}
 
 {% block content %}
-<p>{{lista}}</p>
 <div class="row">
     <div class="col-xs-3">
         
@@ -11,7 +10,7 @@
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="mes">Planilla</label>
-                      <input type="month" name="mes" id="mes" class="form-control" placeholder="" required>
+                      <input type="month" name="mes" id="mes" class="form-control"  required>
                       <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>                    
             </form>
@@ -21,7 +20,7 @@
     </div>
 </div>
 
-
+<a name="registro" id="registro" class="btn btn-primary" href="{% url 'registro' %}" role="button">Ingresar nuevo Empleado</a>
     <table class="table">
         <thead>
             <tr>
@@ -41,8 +40,22 @@
             </tr>
         </thead>
         <tbody>
+                <tr>
+                        <td><b>Totales</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>{{salario__renta__sum}}</b></td>
+                        <td><b>{{salario__porcISSS__sum}}</b></td>
+                        <td><b>{{salario__porcAFP__sum}}</b></td>
+                        <td></td>
+                        <td><b>{{salario__sueldoNeto__sum}}</b></td>
+                    </tr>
             {% for elemento in lista %}
-
                 <tr>
                     <td>{{elemento.empleado.pk}}</td>
                     <td>{{elemento.empleado.apellidos}}</td>
@@ -68,11 +81,11 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>{{salario__renta__sum}}</td>
-                    <td>{{salario__porcISSS__sum}}</td>
-                    <td>{{salario__porcAFP__sum}}</td>
+                    <td><b>{{salario__renta__sum}}</b></td>
+                    <td><b>{{salario__porcISSS__sum}}</b></td>
+                    <td><b>{{salario__porcAFP__sum}}</b></td>
                     <td></td>
-                    <td>{{salario__sueldoNeto__sum}}</td>
+                    <td><b>{{salario__sueldoNeto__sum}}</b></td>
                 </tr>
             
            

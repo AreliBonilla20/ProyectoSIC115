@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+#from django.urls import reverse
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView
 from django.views.generic import View
 from .models import Salario,Empleado,Cargo,Contrato
 import datetime
 from django.db.models import Sum
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -48,7 +52,8 @@ class RegistroView(View):
         print('ok')
         contrato = Contrato.objects.create(empleado=empleado,salario=salario,cargo=cargo,fechaContratacion=datetime.date.today())
         contrato.save()
-        return render(request,'planilla/registro_empleado.html',context={})
+        return HttpResponseRedirect(reverse('tabla'))
+        #return render(request,'planilla/tabla_sueldos.html',context={})
 
 
 class TablaPlanillaView(View):
