@@ -32,7 +32,8 @@ class Contrato(models.Model):
         verbose_name_plural = 'Contratos'
 
     def __str__(self):
-        return f'{self.empleado}/{self.cargo}/{self.salario}'
+        #return f'{self.empleado}/{self.cargo}/{self.salario}'
+        return '{}/{}/{}'.format(self.empleado,self.cargo,self.salario)
 
 class Cargo(models.Model):
 
@@ -44,7 +45,8 @@ class Cargo(models.Model):
         verbose_name_plural = 'Cargos'
 
     def __str__(self):
-        return f'{self.nombreCargo}'
+        #return f'{self.nombreCargo}'
+        return '{}'.format(self.nombreCargo)
 
 
 class Salario(models.Model):
@@ -62,5 +64,6 @@ class Salario(models.Model):
         verbose_name_plural = 'Salarios'
 
     def __str__(self):
-        return f'{self.haberBase}'
+        #return f'{self.haberBase}'
+        return '{}'.format(self.haberBase)
 
