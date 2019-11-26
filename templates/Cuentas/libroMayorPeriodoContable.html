@@ -6,14 +6,14 @@ Libro Mayor
 {% endblock %}
 
 {% block content %}
-<title>{% block Title %}Libro Mayor{% endblock %}</title>
+<title>{% block Title %}Libro Mayor del período contable{% endblock %}</title>
 
 <div class="container-fluid">
 	
 		<div class="form-title">
 			<div class="panel panel-default">
 					<div class="panel-body" style="text-align: center; background:#fbfbfb">
-					  <h4><strong>Libro mayor (Transacciones por cuenta)</strong></h4>
+					  <h4><strong>Libro mayor del período contable</strong></h4>
 							  
 					</div>
 			</div>
@@ -35,8 +35,8 @@ Libro Mayor
 	</tr>
 		</thead>
 				<tbody>
-				{% if object_list %}
-					{% for i in object_list %}
+				{% if elemento %}
+					{% for i in elemento %}
 					<tr>
 						<td></td>
 						<td></td>

@@ -9,21 +9,22 @@ Libro Diario
 <title>{% block Title %}Libro Diario{% endblock %}</title>
 
 
-<div class="container-fluid">
-		<a href="{% url 'asiento:nuevo_asientoContable' %}" type="submit" style="position: absolute; right: 20%; top: 30%;"> <button type="submit" class="btn btn-default" style="font-weight: bold; border-radius: 0%; background: #f0ecec;"
-			onmouseover='this.style.background="#e7e6e6";' onmouseout='this.style.background="#f0ecec";'>Agregar nuevo asiento contable</button></a>
 		
-		<a href="{% url 'asiento:cierre' %}" type="submit" style="position: absolute; right: 3%; top: 30%;"> <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
-				onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Cerrar período contable</button></a>
 		
 		<div class="form-title">
 			<div class="panel panel-default">
 					<div class="panel-body" style="text-align: center; background:#fbfbfb">
-					  <h4><strong>Libro diario</strong></h4>
+					  <h4><strong>Libro diario del período en curso</strong></h4>
 							  
 					</div>
 			</div>
 		</div>
+
+		<a href="{% url 'asiento:nuevo_asientoContable' %}" type="submit" style="position: absolute; right: 3%"> <button type="submit" class="btn btn-default" style="font-weight: bold; border-radius: 0%; background: #f0ecec;"
+			onmouseover='this.style.background="#e7e6e6";' onmouseout='this.style.background="#f0ecec";'>Agregar nuevo asiento contable</button></a>
+				
+		<a href="{% url 'asiento:confirmacion_cerrar_periodo' %}" type="submit" style="position: absolute; right: 25%;"> <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
+				onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Cerrar período contable</button></a>
 
 <br><br>
 
@@ -43,8 +44,8 @@ Libro Diario
 	</tr>
 		</thead>
 				<tbody>
-				{% if object_list %}
-					{% for asiento in object_list %}
+				{% if libroDiario %}
+					{% for asiento in libroDiario %}
 					<tr>
 						<td>{{asiento.numero_asiento}}</td>
 						<td>{{asiento.libroD.fecha}}</td>
@@ -57,8 +58,12 @@ Libro Diario
 						</td>
 					</tr>
 					{% endfor %}
+
+			
+			<div class="container-fluid">
 				{% else %}
 				No hay asientos registrados
+				
 				{% endif %}
 				</tbody>	 
 							

@@ -1,0 +1,39 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Nuevo período
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Período registrado{% endblock %}</title>
+
+<div class=" form-grids row form-grids-right">
+		
+			<div class="form-title">
+					<div class="panel panel-default">
+							<div class="panel-body" style="text-align: center; background: #fbfbfb; font-family:Arial, Helvetica, sans-serif;">
+							  <h4><strong>Período contable registrado</strong></h4>
+									  
+							</div>
+					</div>
+			</div>
+
+			<div class="container" style="text-align: center;">
+				<div class="col-md-12">
+                    <h2 style="background: #a6e2a6; padding: 10px; border-radius:2%;">Período registrado con éxito !</h2>
+                    <br><br>
+                    <h4>Que acción desea realizar ?</h4> <br><br>
+                    <a href="{% url 'asiento:crear_periodo_contable' %}" type="submit"> <button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
+                        onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Agregar período</button></a>
+                        <a href="{% url 'asiento:lista_periodo_contable' %}" type="submit"> <button type="submit" class="btn btn-default" style="font-weight: bold; border-radius: 0%; background: #f0ecec;"
+                            onmouseover='this.style.background="#e7e6e6";' onmouseout='this.style.background="#f0ecec";'>Períodos registrados</button></a>
+			</div>
+			
+			
+		
+			</div>
+			
+		
+</div>
+{% endblock %}

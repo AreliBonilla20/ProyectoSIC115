@@ -1,0 +1,64 @@
+{% extends 'base/base1.html' %}
+{% load staticfiles %}
+
+{% block titulo %}
+Libro Diario
+{% endblock %}
+
+{% block content %}
+<title>{% block Title %}Transacciones en el período contable{% endblock %}</title>
+
+
+<div class="container-fluid">
+		
+		
+		<div class="form-title">
+			<div class="panel panel-default">
+					<div class="panel-body" style="text-align: center; background:#fbfbfb">
+					  <h4><strong>Libro diario</strong></h4>
+							  
+					</div>
+			</div>
+		</div>
+
+		
+<br><br>
+
+
+
+<table class="table table-hover"> 
+	<thead class="thead-light">
+	<tr>
+	<th scope="col"><h4><strong>N° asiento</strong></h4></th>		
+	<th scope="col"><h4><strong>Fecha</strong></h4></th>
+	<th scope="col"><h4><strong>Concepto</strong></h4></th>
+	<th scope="col"><h4><strong>Cuenta debe</strong></h4></th>
+	<th scope="col"><h4><strong>Monto</strong></h4></th>
+	<th scope="col"><h4><strong>Cuenta haber</strong></h4></th>
+	<th scope="col"><h4><strong>Monto</strong></h4></th>
+	
+	</tr>
+		</thead>
+				<tbody>
+				{% if asientos %}
+					{% for i in asientos %}
+					<tr>
+						<td>{{i.numero_asiento}}</td>
+						<td>{{i.libroD.fecha}}</td>
+						<td>{{i.libroD.concepto}}</td>
+						<td>{{i.cuenta_debe}}</td>
+						<td>$ {{i.importeDebe}}</td>
+						<td>{{i.cuenta_haber}}</td>
+						<td>$ {{i.importeHaber}}</td>
+						<td>
+						</td>
+					</tr>
+					{% endfor %}
+				{% else %}
+				No hay asientos registrados
+				{% endif %}
+				</tbody>	 
+							
+</table>
+</div>
+{% endblock %}

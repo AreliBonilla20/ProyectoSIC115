@@ -19,38 +19,42 @@ Nueva cuenta
 					</div>
 			</div>
 
-			<img  style='position: absolute; right: 23%; top: 80%;' src="{% static 'images/agregar.png' %}" width="75px" height="75px">
-
+		
 			<div class="container-fluid">
 				<div class="col-md-12">
 			<div class="form-body">
-				<br><br>
+				
+				
 				<form class="form-horizontal"  method="POST" action="{% url 'asiento:nuevo_asientoContable' %}"> 
-					<div class="form-group">
+						<div class="form-group">
+	
+						<style>
+							form li{
+								visibility: hidden;
+							}
+						</style>
+						{%csrf_token %}
+						<div class="col-md-6">
+						{{form.as_p}}
+						</div>
+	
+						<div class="col-md-5"style="position: absolute; right: 5%; top: 1%;">
+						{{form2.as_p}}
+						</div>
+						 <br><br>
+						 <div style="position: absolute; left: 2%; top: 100%;">
+								<button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
+								onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Guardar</button>
+						 
+						</div> 
+						
+	
+						
+						</div>
+					 </form> 
 
-					<style>
-						form li{
-							visibility: hidden;
-						}
-					</style>
-					{%csrf_token %}
-					<div class="col-md-6">
-					{{form.as_p}}
-					</div>
-
-					<div class="col-md-5"style="position: absolute; right: 5%; top: 1%;">
-					{{form2.as_p}}
-					</div>
-					 <br><br>
-					 <div style="position: absolute; left: 2%; top: 100%;">
-							<button type="submit" class="btn btn-primary" style="font-weight: bold; border-radius: 0%; background: #184365;"
-							onmouseover='this.style.background="#5d829e";' onmouseout='this.style.background="#184365";'>Guardar</button>
-					 
-					</div> 
-					
-					
-					</div>
-				 </form> 
+			
+				
 			
 			</div>
 			</div>
@@ -58,6 +62,7 @@ Nueva cuenta
 
 		
 			</div>
+			
 			
 		
 </div>

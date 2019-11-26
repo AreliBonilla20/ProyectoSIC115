@@ -5,10 +5,7 @@ from apps.asientos_contables.models import *
 class periodoContableForm(forms.ModelForm):
 	class Meta:
 		model = periodoContable
-		OPCIONES = (
-    		('Abierto','Abierto'),
-    		('Cerrado','Cerrado'),
-		)
+	
 
 		fields=[
 		'fechaInicio',
@@ -52,7 +49,7 @@ class asientoContableForm(forms.ModelForm):
 		}
 
 		widgets={
-		'numero_asiento':forms.NumberInput(attrs={'class':'form-control'}),
+		'numero_asiento':forms.NumberInput(attrs={'class':'form-control','required':'required'}),
 		'cuenta_debe':forms.Select(attrs={'class':'form-control','required':'required'}),
 		'importeDebe':forms.NumberInput(attrs={'class':'form-control','required':'required', 'placeholder':'Monto de la cuenta debe'}),
 		'cuenta_haber':forms.Select(attrs={'class':'form-control','required':'required'}),
@@ -82,7 +79,7 @@ class cuentaForm(forms.ModelForm):
 		'codigo':forms.TextInput(attrs={'class':'form-control','required':'required', 'placeholder':'Código de la cuenta'}),
 		'nombre':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\s]{1,50}','required':'required', 'placeholder':'Nombre de la cuenta'}),
 		'tipo_cuenta':forms.Select(attrs={'class':'form-control','required':'required'}),
-		'subcuenta':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\'\s]{1,50}','required':'required', 'placeholder':'Nombre de la subcuenta'}),
+		'subcuenta':forms.TextInput(attrs={'class':'form-control', 'pattern':'[A-Za-záéíóúÁÉÍÓÚ\'\s]{1,50}', 'placeholder':'Nombre de la subcuenta'}),
 		}
 
 class tipoCuentaForm(forms.ModelForm):
